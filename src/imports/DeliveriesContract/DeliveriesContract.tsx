@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router';
 import RoutesContainer from './RoutesContainer';
 import svgPaths from "./svg-er6yqlh6e7";
 import imgThumbnail from "./71d7f36a3fe4c842bd190a79c3b92a977e1a20e0.png";
@@ -2538,20 +2539,21 @@ function Frame12() {
   );
 }
 
-function Frame13({ activeTab, setActiveTab }: { activeTab?: string, setActiveTab?: (tab: string) => void }) {
+function Frame13({ activeTab }: { activeTab?: string }) {
+  const navigate = useNavigate();
   return (
     <div className="bg-white relative shrink-0 w-full" data-name="Frame 13">
       <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex items-center px-[24px] relative size-full">
           <Frame11 />
           <div className="bg-white content-stretch flex items-center overflow-x-auto flex-nowrap relative shrink-0 w-full flex-1 md:justify-center flex-nowrap hide-scrollbar" data-name="Nav">
-            <div onClick={() => setActiveTab?.('Contracts')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
+            <div onClick={() => navigate('/deliveries/contracts')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
               <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Contracts' ? 'border-[#ff7048]' : 'border-white'}`} />
               <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Contracts' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
                 <p className="leading-[normal]">Contracts</p>
               </div>
             </div>
-            <div onClick={() => setActiveTab?.('Routes')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
+            <div onClick={() => navigate('/deliveries/routes')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
               <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Routes' ? 'border-[#ff7048]' : 'border-white'}`} />
               <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Routes' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
                 <p className="leading-[normal]">Routes</p>
@@ -2578,13 +2580,16 @@ function Frame13({ activeTab, setActiveTab }: { activeTab?: string, setActiveTab
   );
 }
 
-export default function DeliveriesContract() {
-  const [activeTab, setActiveTab] = useState('Contracts');
+export default function DeliveriesContract({ defaultTab = 'Contracts' }: { defaultTab?: string }) {
+  const [activeTab, setActiveTab] = useState(defaultTab);
+  useEffect(() => {
+    setActiveTab(defaultTab);
+  }, [defaultTab]);
   return (
     <div className="flex flex-col min-h-screen w-full" style={{ backgroundImage: "linear-gradient(90deg, rgba(43, 59, 99, 0.05) 0%, rgba(43, 59, 99, 0.05) 100%), linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%)" }} data-name="Deliveries - Contract">
       <div className="content-stretch flex flex-col items-start w-full shrink-0" data-name="Navbar">
         <Frame7 />
-        <Frame13 activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Frame13 activeTab={activeTab} />
       </div>
       <div className="flex-1 w-full flex flex-col items-center">
         {activeTab === 'Contracts' ? <Container /> : <RoutesContainer />}

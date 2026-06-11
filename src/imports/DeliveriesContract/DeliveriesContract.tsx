@@ -2008,7 +2008,7 @@ function TableItem54() {
 
 function DeliveriesTable() {
   return (
-    <div className="content-stretch flex flex-col gap-px items-start relative shrink-0 w-full" data-name="Deliveries Table" style={{ overflowX: "auto", maxWidth: "100%" }}>
+    <div className="content-stretch flex flex-col gap-px items-start relative shrink-0 w-full" data-name="Deliveries Table" style={{ overflowX: "auto", overflowY: "hidden", maxWidth: "100%" }}>
       <TableHeaderRow />
       <TableList />
       <div className="bg-white content-stretch flex items-center relative shrink-0 w-full" data-name="Table Entry" style={{ minWidth: "1200px" }}>
@@ -2546,7 +2546,7 @@ function Frame13({ activeTab }: { activeTab?: string }) {
       <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex items-center px-[24px] relative size-full">
           <Frame11 />
-          <div className="bg-white content-stretch flex items-center overflow-x-auto flex-nowrap relative shrink-0 w-full flex-1 md:justify-center flex-nowrap hide-scrollbar" data-name="Nav">
+          <div className="bg-white content-stretch flex items-center flex-nowrap relative shrink-0 w-full flex-1 md:justify-center flex-nowrap hide-scrollbar" data-name="Nav">
             <div onClick={() => navigate('/deliveries/contracts')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
               <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Contracts' ? 'border-[#ff7048]' : 'border-white'}`} />
               <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Contracts' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>

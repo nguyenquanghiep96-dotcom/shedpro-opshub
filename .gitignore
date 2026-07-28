@@ -1,0 +1,9 @@
+.vercel
+.env*
+node_modules
+*.swp
+.DS_Store
+*.cjs
+extract.js
+updateWO.js
+update_mock_data.js

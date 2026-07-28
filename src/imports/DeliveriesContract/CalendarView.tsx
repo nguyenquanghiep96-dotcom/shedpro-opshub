@@ -146,8 +146,8 @@ export default function CalendarView() {
   const todayStr = new Date().toDateString();
 
   return (
-    <div className="flex h-full w-full overflow-hidden bg-[#f8f9fa]">
-      <div className="flex-1 flex flex-col min-w-0">
+    <div className="flex h-full w-full overflow-hidden bg-[#f8f9fa]" style={{ padding: '10px 24px', gap: '24px' }}>
+      <div className="flex-1 flex flex-col min-w-0 bg-white rounded-[6px] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-[#e0e0e0]">
           <div className="flex items-center gap-4">
@@ -199,14 +199,14 @@ export default function CalendarView() {
 
         {/* Calendar Grid */}
         <div className="flex-1 overflow-auto bg-[#f8f9fa] p-6 flex flex-col gap-4">
-          <div className="grid grid-cols-7 gap-4">
+          <div className="grid grid-cols-7">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
               <div key={day} className="text-[#787e90] text-[12px] font-semibold uppercase text-center">
                 {day}
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-7 gap-4 flex-1">
+          <div className="grid grid-cols-7 flex-1">
             {days.map((dayObj, i) => {
               const dateStr = dayObj.date.toDateString();
               const isToday = dateStr === todayStr;
@@ -220,7 +220,7 @@ export default function CalendarView() {
               return (
                 <div 
                   key={i} 
-                  className={`min-h-[140px] rounded-[10px] p-[8px] border shadow-sm ${isToday ? 'border-[#ff7048] bg-[#FFF6F2]' : 'border-[#e0e0e0] bg-white'}`} 
+                  className={`min-h-[140px] p-[8px] border ${isToday ? 'border-[#ff7048] bg-[#FFF6F2]' : 'border-[#e0e0e0] bg-white'}`} 
                   onDragOver={(e) => e.preventDefault()} 
                   onDrop={(e) => { const routeId = e.dataTransfer.getData('routeId'); if(routeId) updateRouteDate(routeId, dayObj.date); }}
                 >
@@ -274,7 +274,7 @@ export default function CalendarView() {
 
       {/* Side Panel */}
       {selectedRoute && (
-        <div className="w-[380px] bg-white border-l border-[#e0e0e0] flex flex-col h-full shadow-[-4px_0_15px_rgba(0,0,0,0.05)]">
+        <div className="w-[380px] bg-white rounded-[6px] flex flex-col h-full shadow-sm overflow-hidden">
           {/* Header */}
           <div className="px-6 pt-6 pb-4 border-b border-[#e0e0e0]">
             <div className="flex justify-between items-start mb-3">
@@ -386,4 +386,3 @@ export default function CalendarView() {
     </div>
   );
 }
-

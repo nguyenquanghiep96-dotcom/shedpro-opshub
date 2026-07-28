@@ -1,18 +1,15 @@
-import { TransportationProvider } from "./TransportationContext";
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import RoutesContainer from './RoutesContainer';
 import WorkOrdersContainer from './WorkOrdersContainer';
 import CalendarView from './CalendarView';
 import RouteDetailPage from './RouteDetailPage';
-
-
-import RoutesContainer from './RoutesContainer';
+import { TransportationProvider } from './TransportationContext';
 import svgPaths from "./svg-er6yqlh6e7";
 import imgThumbnail from "./71d7f36a3fe4c842bd190a79c3b92a977e1a20e0.png";
 import imgAvatar from "./12feda209762e1e7724cd2a5b74ccb79e72d6570.png";
 
-function Group() {
+export function Group() {
   return (
     <div className="absolute inset-[8.33%]" data-name="Group">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 13.3333">
@@ -20,11 +17,11 @@ function Group() {
           <path d={svgPaths.p32ab1080} fill="var(--fill-0, white)" id="Vector" />
         </g>
       </svg>
-    </div></TransportationProvider>
+    </div>
   );
 }
 
-function ButtonsContainer() {
+export function ButtonsContainer() {
   return (
     <div className="content-stretch flex gap-[10px] items-start relative shrink-0 w-auto" data-name="Buttons Container">
       <div className="bg-[#ff7048] content-stretch flex gap-[6px] items-center justify-center overflow-clip px-[16px] py-[10px] relative rounded-[4px] shrink-0" data-name="Button/Filled">
@@ -39,7 +36,7 @@ function ButtonsContainer() {
   );
 }
 
-function Tag() {
+export function Tag() {
   return (
     <div className="content-center flex flex-[1_0_0] flex-wrap gap-[12px] items-center justify-center min-w-px relative" data-name="Tag">
       <button className="bg-[#5e6578] content-stretch cursor-pointer flex gap-[6px] items-center justify-center overflow-clip px-[8px] py-[7px] relative rounded-[34px] shrink-0" data-name="Tag">
@@ -75,7 +72,7 @@ function Tag() {
   );
 }
 
-function Group1() {
+export function Group1() {
   return (
     <div className="absolute inset-[8.33%_8.34%_8.33%_8.33%]" data-name="Group">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.332 13.3331">
@@ -89,7 +86,7 @@ function Group1() {
   );
 }
 
-function SortSection() {
+export function SortSection() {
   return (
     <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full md:w-auto flex-1 md:flex-none flex-wrap" data-name="Sort Section">
       <div className="bg-[#eaecf0] content-stretch flex gap-[6px] items-center justify-center overflow-clip px-[24px] py-[10px] relative rounded-[4px] shrink-0" data-name="Button/Filled">
@@ -104,7 +101,7 @@ function SortSection() {
   );
 }
 
-function Actions() {
+export function Actions() {
   return (
     <div className="content-stretch flex items-center flex-wrap gap-y-4 relative shrink-0 w-full" data-name="Actions">
       <ButtonsContainer />
@@ -114,7 +111,7 @@ function Actions() {
   );
 }
 
-function ActionBar1() {
+export function ActionBar1() {
   return (
     <div className="bg-white content-stretch flex flex-col gap-[10px] items-start p-[16px] relative rounded-[10px] shrink-0 w-full" data-name="Action Bar 1">
       <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid inset-0 pointer-events-none rounded-[10px]" />
@@ -123,7 +120,7 @@ function ActionBar1() {
   );
 }
 
-function ActionBar() {
+export function ActionBar() {
   return (
     <div className="content-stretch flex flex-col items-start py-[10px] relative shrink-0 w-full " data-name="Action Bar 1">
       <ActionBar1 />
@@ -132,7 +129,7 @@ function ActionBar() {
 }
 
 
-function NumberContainer() {
+export function NumberContainer() {
   return (
     <div className="bg-[#2b3b63] content-stretch flex flex-col items-center justify-center min-w-[30px] px-[6px] py-[4px] relative rounded-[6px] shrink-0" data-name="Number Container">
       <div className="[word-break:break-word] flex flex-col font-sans font-bold justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-center text-white whitespace-nowrap">
@@ -142,18 +139,18 @@ function NumberContainer() {
   );
 }
 
-function TitleSection() {
+export function TitleSection() {
   return (
     <div className="content-stretch flex gap-[10px] items-center pl-[10px] relative shrink-0 w-full lg:w-auto flex-1" data-name="Title Section">
       <div className="[word-break:break-word] flex flex-col font-sans font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#2b3b63] text-[32px] whitespace-nowrap">
-        <p className="leading-[normal]">Deliveries</p>
+        <p className="leading-[normal]">Transportation</p>
       </div>
       <NumberContainer />
     </div>
   );
 }
 
-function Group3() {
+export function Group3() {
   return (
     <div className="relative size-full" data-name="Group">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 8">
@@ -165,7 +162,7 @@ function Group3() {
   );
 }
 
-function Group2() {
+export function Group2() {
   return (
     <div className="absolute bottom-[8.33%] contents left-1/4 right-1/4 top-[8.33%]" style={{ containerType: "size" }} data-name="Group">
       <div className="absolute bottom-[8.33%] flex items-center justify-center left-1/4 right-1/4 top-[8.33%]" style={{ containerType: "size" }}>
@@ -177,7 +174,7 @@ function Group2() {
   );
 }
 
-function Group5() {
+export function Group5() {
   return (
     <div className="relative size-full" data-name="Group">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 8">
@@ -189,7 +186,7 @@ function Group5() {
   );
 }
 
-function Group4() {
+export function Group4() {
   return (
     <div className="absolute bottom-[8.33%] contents left-1/4 right-1/4 top-[8.33%]" style={{ containerType: "size" }} data-name="Group">
       <div className="absolute bottom-[8.33%] flex items-center justify-center left-1/4 right-1/4 top-[8.33%]" style={{ containerType: "size" }}>
@@ -201,7 +198,7 @@ function Group4() {
   );
 }
 
-function PageControlGroup() {
+export function PageControlGroup() {
   return (
     <div className="content-stretch flex items-center relative shrink-0" data-name="Page Control Group">
       <div className="bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[10px] relative rounded-[4px] shrink-0" data-name="Button/Single">
@@ -218,7 +215,7 @@ function PageControlGroup() {
   );
 }
 
-function PageControlContainer() {
+export function PageControlContainer() {
   return (
     <div className="content-stretch flex items-center justify-end relative shrink-0" data-name="Page Control Container">
       <PageControlGroup />
@@ -226,7 +223,7 @@ function PageControlContainer() {
   );
 }
 
-function PageInfoContainer() {
+export function PageInfoContainer() {
   return (
     <div className="content-stretch flex gap-[10px] items-center relative shrink-0" data-name="Page Info Container">
       <p className="[word-break:break-word] font-sans font-normal leading-[normal] not-italic relative shrink-0 text-[#787e90] text-[14px] whitespace-nowrap">Page 1 of 5</p>
@@ -235,7 +232,7 @@ function PageInfoContainer() {
   );
 }
 
-function PaginationContainer() {
+export function PaginationContainer() {
   return (
     <div className="content-stretch flex gap-[42px] items-center relative shrink-0" data-name="Pagination Container">
       <div className="bg-white relative rounded-[4px] shrink-0" data-name="Button/Single">
@@ -255,7 +252,7 @@ function PaginationContainer() {
   );
 }
 
-function TableHeader() {
+export function TableHeader() {
   return (
     <div className="bg-white content-stretch flex items-center justify-between flex-wrap gap-y-4 py-[16px] relative shrink-0 w-full" data-name="Table Header">
       <TitleSection />
@@ -264,7 +261,7 @@ function TableHeader() {
   );
 }
 
-function Component01AlignCenter() {
+export function Component01AlignCenter() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -276,7 +273,7 @@ function Component01AlignCenter() {
   );
 }
 
-function Component01AlignCenter1() {
+export function Component01AlignCenter1() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -288,7 +285,7 @@ function Component01AlignCenter1() {
   );
 }
 
-function Component01AlignCenter2() {
+export function Component01AlignCenter2() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -300,7 +297,7 @@ function Component01AlignCenter2() {
   );
 }
 
-function Component01AlignCenter3() {
+export function Component01AlignCenter3() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -312,7 +309,7 @@ function Component01AlignCenter3() {
   );
 }
 
-function Component01AlignCenter4() {
+export function Component01AlignCenter4() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -324,7 +321,7 @@ function Component01AlignCenter4() {
   );
 }
 
-function Component01AlignCenter5() {
+export function Component01AlignCenter5() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -336,7 +333,7 @@ function Component01AlignCenter5() {
   );
 }
 
-function Component01AlignCenter6() {
+export function Component01AlignCenter6() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -348,7 +345,7 @@ function Component01AlignCenter6() {
   );
 }
 
-function Component01AlignCenter7() {
+export function Component01AlignCenter7() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -360,7 +357,7 @@ function Component01AlignCenter7() {
   );
 }
 
-function Component01AlignCenter8() {
+export function Component01AlignCenter8() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -372,7 +369,7 @@ function Component01AlignCenter8() {
   );
 }
 
-function Component01AlignCenter9() {
+export function Component01AlignCenter9() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -384,7 +381,7 @@ function Component01AlignCenter9() {
   );
 }
 
-function Component01AlignCenter10() {
+export function Component01AlignCenter10() {
   return (
     <div className="relative size-full" data-name="01 align center">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
@@ -396,7 +393,7 @@ function Component01AlignCenter10() {
   );
 }
 
-function TableHeaderRow() {
+export function TableHeaderRow() {
   return (
     <div className="bg-white content-stretch flex items-center relative shrink-0 w-full" data-name="Table Header Row" style={{ minWidth: "1200px" }}>
       <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid border-t inset-[-1px_0] pointer-events-none" />
@@ -618,7 +615,7 @@ function TableHeaderRow() {
   );
 }
 
-function Checkbox() {
+export function Checkbox() {
   return (
     <div className="h-full relative shrink-0 w-[58px]" data-name="Checkbox">
       <div className="flex flex-row items-center justify-center size-full">
@@ -643,7 +640,7 @@ function Checkbox() {
   );
 }
 
-function Text() {
+export function Text() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -653,7 +650,7 @@ function Text() {
   );
 }
 
-function Text1() {
+export function Text1() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -663,7 +660,7 @@ function Text1() {
   );
 }
 
-function TableItem() {
+export function TableItem() {
   return (
     <div className="h-full relative shrink-0 w-[320px]" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -676,7 +673,7 @@ function TableItem() {
   );
 }
 
-function Text2() {
+export function Text2() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -686,7 +683,7 @@ function Text2() {
   );
 }
 
-function TableItem1() {
+export function TableItem1() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -698,7 +695,7 @@ function TableItem1() {
   );
 }
 
-function TableItem2() {
+export function TableItem2() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -713,7 +710,7 @@ function TableItem2() {
   );
 }
 
-function Text3() {
+export function Text3() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -723,7 +720,7 @@ function Text3() {
   );
 }
 
-function TableItem3() {
+export function TableItem3() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -735,7 +732,7 @@ function TableItem3() {
   );
 }
 
-function Text4() {
+export function Text4() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -745,7 +742,7 @@ function Text4() {
   );
 }
 
-function TableItem4() {
+export function TableItem4() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -757,7 +754,7 @@ function TableItem4() {
   );
 }
 
-function Text5() {
+export function Text5() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -767,7 +764,7 @@ function Text5() {
   );
 }
 
-function TableItem5() {
+export function TableItem5() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -779,7 +776,7 @@ function TableItem5() {
   );
 }
 
-function Text6() {
+export function Text6() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -789,7 +786,7 @@ function Text6() {
   );
 }
 
-function TableItem6() {
+export function TableItem6() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -801,7 +798,7 @@ function TableItem6() {
   );
 }
 
-function Text7() {
+export function Text7() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -811,7 +808,7 @@ function Text7() {
   );
 }
 
-function TableItem7() {
+export function TableItem7() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -823,7 +820,7 @@ function TableItem7() {
   );
 }
 
-function Text8() {
+export function Text8() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -833,7 +830,7 @@ function Text8() {
   );
 }
 
-function TableItem8() {
+export function TableItem8() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -845,7 +842,7 @@ function TableItem8() {
   );
 }
 
-function Status() {
+export function Status() {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start justify-center min-w-px relative" data-name="Status">
       <div className="bg-[#32b6fd] content-stretch flex items-center px-[8px] py-[3px] relative rounded-[3px] shrink-0" data-name="Value">
@@ -855,7 +852,7 @@ function Status() {
   );
 }
 
-function TableItem9() {
+export function TableItem9() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -867,7 +864,7 @@ function TableItem9() {
   );
 }
 
-function Layer() {
+export function Layer() {
   return (
     <div className="absolute inset-[8.33%]" data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 13.3333">
@@ -885,7 +882,7 @@ function Layer() {
   );
 }
 
-function TableItem10() {
+export function TableItem10() {
   return (
     <div className="content-stretch flex gap-[6px] h-[64px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[60px]" data-name="Table-Item">
       <div className="bg-white content-stretch flex gap-[6px] items-center justify-end overflow-clip p-[10px] relative rounded-[4px] shrink-0" data-name="Button/Single">
@@ -897,7 +894,7 @@ function TableItem10() {
   );
 }
 
-function TableList({ className }: { className?: string }) {
+export function TableList({ className }: { className?: string }) {
   return (
     <div className={className || "bg-white content-stretch flex items-center relative shrink-0 w-full"} data-name="Table-List" style={{ minWidth: "1200px" }}>
       <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid inset-[0_0_-1px_0] pointer-events-none" />
@@ -939,7 +936,7 @@ function TableList({ className }: { className?: string }) {
   );
 }
 
-function Checkbox1() {
+export function Checkbox1() {
   return (
     <div className="h-full relative shrink-0 w-[58px]" data-name="Checkbox">
       <div className="flex flex-row items-center justify-center size-full">
@@ -964,7 +961,7 @@ function Checkbox1() {
   );
 }
 
-function Text9() {
+export function Text9() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -974,7 +971,7 @@ function Text9() {
   );
 }
 
-function Text10() {
+export function Text10() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -984,7 +981,7 @@ function Text10() {
   );
 }
 
-function TableItem11() {
+export function TableItem11() {
   return (
     <div className="h-full relative shrink-0 w-[320px]" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -997,7 +994,7 @@ function TableItem11() {
   );
 }
 
-function Text11() {
+export function Text11() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1007,7 +1004,7 @@ function Text11() {
   );
 }
 
-function TableItem12() {
+export function TableItem12() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1019,7 +1016,7 @@ function TableItem12() {
   );
 }
 
-function TableItem13() {
+export function TableItem13() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1034,7 +1031,7 @@ function TableItem13() {
   );
 }
 
-function Text12() {
+export function Text12() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1044,7 +1041,7 @@ function Text12() {
   );
 }
 
-function TableItem14() {
+export function TableItem14() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1056,7 +1053,7 @@ function TableItem14() {
   );
 }
 
-function Text13() {
+export function Text13() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1066,7 +1063,7 @@ function Text13() {
   );
 }
 
-function TableItem15() {
+export function TableItem15() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1078,7 +1075,7 @@ function TableItem15() {
   );
 }
 
-function Text14() {
+export function Text14() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1088,7 +1085,7 @@ function Text14() {
   );
 }
 
-function TableItem16() {
+export function TableItem16() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1100,7 +1097,7 @@ function TableItem16() {
   );
 }
 
-function Text15() {
+export function Text15() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1110,7 +1107,7 @@ function Text15() {
   );
 }
 
-function TableItem17() {
+export function TableItem17() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1122,7 +1119,7 @@ function TableItem17() {
   );
 }
 
-function Text16() {
+export function Text16() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1132,7 +1129,7 @@ function Text16() {
   );
 }
 
-function TableItem18() {
+export function TableItem18() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1144,11 +1141,11 @@ function TableItem18() {
   );
 }
 
-function Text17() {
+export function Text17() {
   return <div className="content-stretch flex flex-col gap-[2px] h-[17px] items-start relative shrink-0 w-full" data-name="Text" />;
 }
 
-function TableItem19() {
+export function TableItem19() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1160,7 +1157,7 @@ function TableItem19() {
   );
 }
 
-function Status1() {
+export function Status1() {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start justify-center min-w-px relative" data-name="Status">
       <div className="bg-[#32b6fd] content-stretch flex items-center px-[8px] py-[3px] relative rounded-[3px] shrink-0" data-name="Value">
@@ -1170,7 +1167,7 @@ function Status1() {
   );
 }
 
-function TableItem20() {
+export function TableItem20() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1182,7 +1179,7 @@ function TableItem20() {
   );
 }
 
-function Layer1() {
+export function Layer1() {
   return (
     <div className="absolute inset-[8.33%]" data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 13.3333">
@@ -1200,7 +1197,7 @@ function Layer1() {
   );
 }
 
-function TableItem21() {
+export function TableItem21() {
   return (
     <div className="content-stretch flex gap-[6px] h-[64px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[60px]" data-name="Table-Item">
       <div className="bg-white content-stretch flex gap-[6px] items-center justify-end overflow-clip p-[10px] relative rounded-[4px] shrink-0" data-name="Button/Single">
@@ -1212,7 +1209,7 @@ function TableItem21() {
   );
 }
 
-function Checkbox2() {
+export function Checkbox2() {
   return (
     <div className="h-full relative shrink-0 w-[58px]" data-name="Checkbox">
       <div className="flex flex-row items-center justify-center size-full">
@@ -1237,7 +1234,7 @@ function Checkbox2() {
   );
 }
 
-function Text18() {
+export function Text18() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1247,7 +1244,7 @@ function Text18() {
   );
 }
 
-function Text19() {
+export function Text19() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1257,7 +1254,7 @@ function Text19() {
   );
 }
 
-function TableItem22() {
+export function TableItem22() {
   return (
     <div className="h-full relative shrink-0 w-[320px]" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1270,7 +1267,7 @@ function TableItem22() {
   );
 }
 
-function Text20() {
+export function Text20() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1280,7 +1277,7 @@ function Text20() {
   );
 }
 
-function TableItem23() {
+export function TableItem23() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1292,7 +1289,7 @@ function TableItem23() {
   );
 }
 
-function TableItem24() {
+export function TableItem24() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1307,7 +1304,7 @@ function TableItem24() {
   );
 }
 
-function Text21() {
+export function Text21() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1317,7 +1314,7 @@ function Text21() {
   );
 }
 
-function TableItem25() {
+export function TableItem25() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1329,7 +1326,7 @@ function TableItem25() {
   );
 }
 
-function Text22() {
+export function Text22() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1339,7 +1336,7 @@ function Text22() {
   );
 }
 
-function TableItem26() {
+export function TableItem26() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1351,7 +1348,7 @@ function TableItem26() {
   );
 }
 
-function Text23() {
+export function Text23() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1361,7 +1358,7 @@ function Text23() {
   );
 }
 
-function TableItem27() {
+export function TableItem27() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1373,7 +1370,7 @@ function TableItem27() {
   );
 }
 
-function Text24() {
+export function Text24() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1383,7 +1380,7 @@ function Text24() {
   );
 }
 
-function TableItem28() {
+export function TableItem28() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1395,7 +1392,7 @@ function TableItem28() {
   );
 }
 
-function Text25() {
+export function Text25() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1405,7 +1402,7 @@ function Text25() {
   );
 }
 
-function TableItem29() {
+export function TableItem29() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1417,7 +1414,7 @@ function TableItem29() {
   );
 }
 
-function TableItem30() {
+export function TableItem30() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1427,7 +1424,7 @@ function TableItem30() {
   );
 }
 
-function Status2() {
+export function Status2() {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start justify-center min-w-px relative" data-name="Status">
       <div className="bg-[#32b6fd] content-stretch flex items-center px-[8px] py-[3px] relative rounded-[3px] shrink-0" data-name="Value">
@@ -1437,7 +1434,7 @@ function Status2() {
   );
 }
 
-function TableItem31() {
+export function TableItem31() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1449,7 +1446,7 @@ function TableItem31() {
   );
 }
 
-function Layer2() {
+export function Layer2() {
   return (
     <div className="absolute inset-[8.33%]" data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 13.3333">
@@ -1467,7 +1464,7 @@ function Layer2() {
   );
 }
 
-function TableItem32() {
+export function TableItem32() {
   return (
     <div className="content-stretch flex gap-[6px] h-[64px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[60px]" data-name="Table-Item">
       <div className="bg-white content-stretch flex gap-[6px] items-center justify-end overflow-clip p-[10px] relative rounded-[4px] shrink-0" data-name="Button/Single">
@@ -1479,7 +1476,7 @@ function TableItem32() {
   );
 }
 
-function Checkbox3() {
+export function Checkbox3() {
   return (
     <div className="h-full relative shrink-0 w-[58px]" data-name="Checkbox">
       <div className="flex flex-row items-center justify-center size-full">
@@ -1504,7 +1501,7 @@ function Checkbox3() {
   );
 }
 
-function Text26() {
+export function Text26() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1514,7 +1511,7 @@ function Text26() {
   );
 }
 
-function Text27() {
+export function Text27() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1524,7 +1521,7 @@ function Text27() {
   );
 }
 
-function TableItem33() {
+export function TableItem33() {
   return (
     <div className="h-full relative shrink-0 w-[320px]" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1537,7 +1534,7 @@ function TableItem33() {
   );
 }
 
-function Text28() {
+export function Text28() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1547,7 +1544,7 @@ function Text28() {
   );
 }
 
-function TableItem34() {
+export function TableItem34() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1559,7 +1556,7 @@ function TableItem34() {
   );
 }
 
-function TableItem35() {
+export function TableItem35() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1574,7 +1571,7 @@ function TableItem35() {
   );
 }
 
-function Text29() {
+export function Text29() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1584,7 +1581,7 @@ function Text29() {
   );
 }
 
-function TableItem36() {
+export function TableItem36() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1596,7 +1593,7 @@ function TableItem36() {
   );
 }
 
-function Text30() {
+export function Text30() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1606,7 +1603,7 @@ function Text30() {
   );
 }
 
-function TableItem37() {
+export function TableItem37() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1618,7 +1615,7 @@ function TableItem37() {
   );
 }
 
-function Text31() {
+export function Text31() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1628,7 +1625,7 @@ function Text31() {
   );
 }
 
-function TableItem38() {
+export function TableItem38() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1640,7 +1637,7 @@ function TableItem38() {
   );
 }
 
-function Text32() {
+export function Text32() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1650,7 +1647,7 @@ function Text32() {
   );
 }
 
-function TableItem39() {
+export function TableItem39() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1662,7 +1659,7 @@ function TableItem39() {
   );
 }
 
-function Text33() {
+export function Text33() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1672,7 +1669,7 @@ function Text33() {
   );
 }
 
-function TableItem40() {
+export function TableItem40() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1684,7 +1681,7 @@ function TableItem40() {
   );
 }
 
-function TableItem41() {
+export function TableItem41() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1694,7 +1691,7 @@ function TableItem41() {
   );
 }
 
-function Status3() {
+export function Status3() {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start justify-center min-w-px relative" data-name="Status">
       <div className="bg-[#32b6fd] content-stretch flex items-center px-[8px] py-[3px] relative rounded-[3px] shrink-0" data-name="Value">
@@ -1704,7 +1701,7 @@ function Status3() {
   );
 }
 
-function TableItem42() {
+export function TableItem42() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1716,7 +1713,7 @@ function TableItem42() {
   );
 }
 
-function Layer3() {
+export function Layer3() {
   return (
     <div className="absolute inset-[8.33%]" data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 13.3333">
@@ -1734,7 +1731,7 @@ function Layer3() {
   );
 }
 
-function TableItem43() {
+export function TableItem43() {
   return (
     <div className="content-stretch flex gap-[6px] h-[64px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[60px]" data-name="Table-Item">
       <div className="bg-white content-stretch flex gap-[6px] items-center justify-end overflow-clip p-[10px] relative rounded-[4px] shrink-0" data-name="Button/Single">
@@ -1746,7 +1743,7 @@ function TableItem43() {
   );
 }
 
-function Checkbox4() {
+export function Checkbox4() {
   return (
     <div className="h-full relative shrink-0 w-[58px]" data-name="Checkbox">
       <div className="flex flex-row items-center justify-center size-full">
@@ -1771,7 +1768,7 @@ function Checkbox4() {
   );
 }
 
-function Text34() {
+export function Text34() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1781,7 +1778,7 @@ function Text34() {
   );
 }
 
-function Text35() {
+export function Text35() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1791,7 +1788,7 @@ function Text35() {
   );
 }
 
-function TableItem44() {
+export function TableItem44() {
   return (
     <div className="h-full relative shrink-0 w-[320px]" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1804,7 +1801,7 @@ function TableItem44() {
   );
 }
 
-function Text36() {
+export function Text36() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1814,7 +1811,7 @@ function Text36() {
   );
 }
 
-function TableItem45() {
+export function TableItem45() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1826,7 +1823,7 @@ function TableItem45() {
   );
 }
 
-function TableItem46() {
+export function TableItem46() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1841,7 +1838,7 @@ function TableItem46() {
   );
 }
 
-function Text37() {
+export function Text37() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1851,7 +1848,7 @@ function Text37() {
   );
 }
 
-function TableItem47() {
+export function TableItem47() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1863,7 +1860,7 @@ function TableItem47() {
   );
 }
 
-function Text38() {
+export function Text38() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1873,7 +1870,7 @@ function Text38() {
   );
 }
 
-function TableItem48() {
+export function TableItem48() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1885,7 +1882,7 @@ function TableItem48() {
   );
 }
 
-function Text39() {
+export function Text39() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1895,7 +1892,7 @@ function Text39() {
   );
 }
 
-function TableItem49() {
+export function TableItem49() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1907,7 +1904,7 @@ function TableItem49() {
   );
 }
 
-function Text40() {
+export function Text40() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1917,7 +1914,7 @@ function Text40() {
   );
 }
 
-function TableItem50() {
+export function TableItem50() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1929,7 +1926,7 @@ function TableItem50() {
   );
 }
 
-function Text41() {
+export function Text41() {
   return (
     <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-name="Text">
       <div className="[word-break:break-word] flex flex-col font-sans font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] w-full">
@@ -1939,7 +1936,7 @@ function Text41() {
   );
 }
 
-function TableItem51() {
+export function TableItem51() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1951,7 +1948,7 @@ function TableItem51() {
   );
 }
 
-function TableItem52() {
+export function TableItem52() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-col justify-center size-full">
@@ -1961,7 +1958,7 @@ function TableItem52() {
   );
 }
 
-function Status4() {
+export function Status4() {
   return (
     <div className="content-stretch flex flex-[1_0_0] flex-col items-start justify-center min-w-px relative" data-name="Status">
       <div className="bg-[#32b6fd] content-stretch flex items-center px-[8px] py-[3px] relative rounded-[3px] shrink-0" data-name="Value">
@@ -1971,7 +1968,7 @@ function Status4() {
   );
 }
 
-function TableItem53() {
+export function TableItem53() {
   return (
     <div className="flex-[1_0_0] h-full min-w-px relative" data-name="Table-Item">
       <div className="flex flex-row items-center size-full">
@@ -1983,7 +1980,7 @@ function TableItem53() {
   );
 }
 
-function Layer4() {
+export function Layer4() {
   return (
     <div className="absolute inset-[8.33%]" data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 13.3333">
@@ -2001,7 +1998,7 @@ function Layer4() {
   );
 }
 
-function TableItem54() {
+export function TableItem54() {
   return (
     <div className="content-stretch flex gap-[6px] h-[64px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[60px]" data-name="Table-Item">
       <div className="bg-white content-stretch flex gap-[6px] items-center justify-end overflow-clip p-[10px] relative rounded-[4px] shrink-0" data-name="Button/Single">
@@ -2013,7 +2010,7 @@ function TableItem54() {
   );
 }
 
-function DeliveriesTable() {
+export function DeliveriesTable() {
   return (
     <div className="content-stretch flex flex-col gap-px items-start relative shrink-0 w-full" data-name="Deliveries Table" style={{ overflowX: "auto", overflowY: "hidden", maxWidth: "100%" }}>
       <TableHeaderRow />
@@ -2170,7 +2167,7 @@ function DeliveriesTable() {
   );
 }
 
-function DeliveriesTableContainer() {
+export function DeliveriesTableContainer() {
   return (
     <div className="bg-white content-stretch flex flex-col items-start px-[12px] relative rounded-[10px] shrink-0 w-full" data-name="Deliveries Table Container">
       <TableHeader />
@@ -2179,7 +2176,374 @@ function DeliveriesTableContainer() {
   );
 }
 
-function Frame13({ activeTab }: { activeTab?: string }) {
+export function Container() {
+  return (
+    <div className="content-stretch flex flex-col items-center w-full px-4 lg:px-[24px]" data-name="Container">
+      <ActionBar />
+      <DeliveriesTableContainer />
+    </div>
+  );
+}
+
+export function Frame4() {
+  return (
+    <div className="content-stretch flex flex-row items-center gap-[12px] relative shrink-0 w-auto">
+      <div className="h-[54px] relative shrink-0 w-[171px]" data-name="Button/Logo/ShedPro-White">
+        <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 171 54">
+          <g id="Group 79">
+            <g id="PRO">
+              <path d={svgPaths.p2f5d6280} fill="var(--fill-0, #FF7048)" />
+              <path d={svgPaths.p3c8eb500} fill="var(--fill-0, #FF7048)" />
+              <path d={svgPaths.pcd67c00} fill="var(--fill-0, #FF7048)" />
+            </g>
+            <path clipRule="evenodd" d={svgPaths.p1b25e300} fill="var(--fill-0, #FF7048)" fillRule="evenodd" id="Rectangle (Stroke)" />
+            <g id="SHED">
+              <path d={svgPaths.p1cd33f00} fill="var(--fill-0, #2B3B63)" />
+              <path d={svgPaths.p374f1d80} fill="var(--fill-0, #2B3B63)" />
+              <path d={svgPaths.p3b42e500} fill="var(--fill-0, #2B3B63)" />
+              <path d={svgPaths.p1d6bd600} fill="var(--fill-0, #2B3B63)" />
+            </g>
+          </g>
+        </svg>
+      </div>
+      <span className="font-sans font-bold text-[14px] text-[#5e6578]">PROTOYPE</span>
+    </div>
+  );
+}
+
+export function Group6() {
+  return (
+    <div className="absolute inset-[4.17%_4.17%_4.16%_4.17%]" data-name="Group">
+      <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 18.3325 18.3341">
+        <g id="Group">
+          <path d={svgPaths.p6ade000} fill="var(--fill-0, #2B3B63)" id="Vector" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+export function Frame1() {
+  return (
+    <div className="content-stretch flex gap-[10px] items-center relative shrink-0 w-full">
+      <p className="[word-break:break-word] flex-[1_0_0] font-sans font-normal leading-[normal] min-w-px not-italic relative text-[#5e6578] text-[14px]">Search</p>
+      <div className="overflow-clip relative shrink-0 size-[20px]" data-name="Search">
+        <Group6 />
+      </div>
+    </div>
+  );
+}
+
+export function Frame2() {
+  return (
+    <div className="bg-white content-stretch flex flex-col items-start px-[16px] py-[10px] relative rounded-[6px] shrink-0 w-[600px]">
+      <div aria-hidden className="absolute border border-[#e0e0e0] border-solid inset-0 pointer-events-none rounded-[6px]" />
+      <Frame1 />
+    </div>
+  );
+}
+
+export function Number() {
+  return (
+    <div className="absolute bg-[#f41e1e] content-stretch flex flex-col items-center justify-center left-[26px] px-[4px] py-[5.5px] rounded-[40px] top-[26px] w-[18px]" data-name="Number">
+      <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] font-sans font-semibold leading-[normal] not-italic relative shrink-0 text-[10px] text-white w-full">16</p>
+    </div>
+  );
+}
+
+export function Frame() {
+  return (
+    <div className="content-stretch flex flex-col items-end relative shrink-0 w-[118px]">
+      <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#2b3b63] text-[14px] w-full">Hiep Nguyen</p>
+    </div>
+  );
+}
+
+export function Layer5() {
+  return (
+    <div className="absolute inset-[4.17%_4.17%_0_0]" data-name="Layer_1">
+      <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15.3333 15.3333">
+        <g clipPath="url(#clip0_1_1998)" id="Layer_1">
+          <path d={svgPaths.p307f3e00} fill="var(--fill-0, #5E6578)" id="Vector" />
+          <path d={svgPaths.p33251380} fill="var(--fill-0, #5E6578)" id="Vector_2" />
+        </g>
+        <defs>
+          <clipPath id="clip0_1_1998">
+            <rect fill="white" height="15.3333" width="15.3333" />
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+export function Frame10() {
+  return (
+    <div className="content-stretch flex gap-[10px] items-center relative shrink-0">
+      <div className="content-stretch flex gap-[10px] items-center py-[10px] relative rounded-[6px] shrink-0" data-name="User - Dropdown">
+        <div className="relative shrink-0 size-[40px]" data-name="Avatar">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" height="40" src={imgAvatar} width="40" />
+        </div>
+        <Frame />
+      </div>
+      <div className="content-stretch flex gap-[6px] items-center justify-center overflow-clip px-[10px] py-[8px] relative rounded-[4px] shrink-0" data-name="Button/Filled">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Logout - Outline">
+          <Layer5 />
+        </div>
+        <div className="[word-break:break-word] capitalize flex flex-col font-sans font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] text-center whitespace-nowrap">
+          <p className="leading-[16px]">Logout</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Frame3() {
+  return (
+    <div className="content-stretch flex gap-[24px] items-center relative shrink-0">
+      <Frame2 />
+      <div className="bg-[rgba(43,59,99,0.1)] content-stretch flex gap-[10px] items-center p-[10px] relative rounded-[6px] shrink-0" data-name="Notification">
+        <div className="overflow-clip relative shrink-0 size-[20px]" data-name="Icon / Interface / Notification - Solid">
+          <div className="absolute inset-[8.33%]" data-name="Union">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16.6668 16.666">
+              <path d={svgPaths.p377bd100} fill="var(--fill-0, #2B3B63)" id="Union" />
+            </svg>
+          </div>
+        </div>
+        <Number />
+      </div>
+      <Frame10 />
+    </div>
+  );
+}
+
+export function Frame8() {
+  return (
+    <div className="absolute inset-[4.17%]">
+      <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14.6667 14.6667">
+        <g id="Frame 1099">
+          <path d={svgPaths.p29a18d00} fill="var(--fill-0, #5E6578)" id="Vector" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+export function Frame9() {
+  return (
+    <div className="absolute inset-[4.17%]">
+      <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14.6667 14.6667">
+        <g id="Frame 1098">
+          <path d={svgPaths.p15b9fe00} fill="var(--fill-0, #5E6578)" id="Vector" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+export function Layer6() {
+  return (
+    <div className="absolute inset-[4.17%_0_0_0]" data-name="Layer_1">
+      <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 15.3333">
+        <g clipPath="url(#clip0_1_1975)" id="Layer_1">
+          <path d={svgPaths.p3d0cdc00} fill="var(--fill-0, #5E6578)" id="Vector" />
+          <path d={svgPaths.p21f44000} fill="var(--fill-0, #5E6578)" id="Vector_2" />
+        </g>
+        <defs>
+          <clipPath id="clip0_1_1975">
+            <rect fill="white" height="15.3333" width="16" />
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+export function Frame5() {
+  return (
+    <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-end min-w-px relative">
+      <div className="relative rounded-[4px] shrink-0" data-name="Button/Filled">
+        <div className="content-stretch flex gap-[6px] items-center justify-center overflow-clip px-[12px] py-[10px] relative rounded-[inherit] size-full">
+          <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Calculator - Line">
+            <div className="absolute inset-[0_4.17%]" data-name="Vector">
+              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14.6667 16">
+                <path d={svgPaths.p344bbf00} fill="var(--fill-0, #5E6578)" id="Vector" />
+              </svg>
+            </div>
+          </div>
+          <div className="[word-break:break-word] capitalize flex flex-col font-sans font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] text-center whitespace-nowrap">
+            <p className="leading-[16px]">calculator</p>
+          </div>
+        </div>
+        <div aria-hidden className="absolute border border-[#e0e0e0] border-solid inset-0 pointer-events-none rounded-[4px]" />
+      </div>
+    </div>
+  );
+}
+
+export function Tab() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center pt-[10px] relative shrink-0 w-full" data-name="Tab">
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <Frame8 />
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Home</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+            <g clipPath="url(#clip0_1_1839)" id="door-open 1">
+              <path d={svgPaths.p2cb926f0} fill="var(--fill-0, #5E6578)" id="Vector" />
+            </g>
+            <defs>
+              <clipPath id="clip0_1_1839">
+                <rect fill="white" height="16" width="16" />
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">RTO</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <Frame9 />
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Cash Sales</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <div className="absolute inset-[4.13%_4.17%_4.17%_4.17%]" data-name="Union">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14.666 14.6729">
+              <path d={svgPaths.p28f3ca00} fill="var(--fill-0, #5E6578)" id="Union" />
+            </svg>
+          </div>
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Quotes</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <Layer6 />
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Inventory</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+            <g clipPath="url(#clip0_1_1918)" id="Layer_1">
+              <path d={svgPaths.p31c3a00} fill="var(--fill-0, #5E6578)" id="Vector" />
+              <path d={svgPaths.p111c2580} fill="var(--fill-0, #5E6578)" id="Vector_2" />
+              <path d={svgPaths.p3586f780} fill="var(--fill-0, #5E6578)" id="Vector_3" />
+            </g>
+            <defs>
+              <clipPath id="clip0_1_1918">
+                <rect fill="white" height="16" width="16" />
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Builds</p>
+      </button>
+      <button className="bg-[#2b3b63] content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div aria-hidden className="absolute border-[#2b3b63] border-b-3 border-solid inset-0 pointer-events-none rounded-tl-[6px] rounded-tr-[6px]" />
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <div className="absolute inset-[12.5%_0_15.28%_0]" data-name="Union">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15.9993 11.5554">
+              <path d={svgPaths.p123b2e00} fill="var(--fill-0, white)" id="Union" />
+            </svg>
+          </div>
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-white text-[16px] text-left whitespace-nowrap">Transportation</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <div className="absolute inset-[0_8.33%_0_0]" data-name="Vector">
+            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 14.6667 16">
+              <g id="Vector">
+                <path d={svgPaths.p197ff380} fill="var(--fill-0, #5E6578)" />
+                <path d={svgPaths.p35ac5800} fill="var(--fill-0, #5E6578)" />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Reports</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+            <path d={svgPaths.p3f31ef00} fill="var(--fill-0, #5E6578)" id="Vector" />
+          </svg>
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Admin</p>
+      </button>
+      <button className="bg-white content-stretch cursor-pointer flex gap-[10px] items-center justify-center px-[16px] py-[12px] relative rounded-tl-[6px] rounded-tr-[6px] shrink-0" data-name="Tab">
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-name="Icon / Interface / Notification - Solid">
+          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+            <path d={svgPaths.p2de65770} fill="var(--fill-0, #5E6578)" id="Vector" />
+          </svg>
+        </div>
+        <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[16px] text-left whitespace-nowrap">Tutorials</p>
+      </button>
+      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+        <Frame5 />
+      </div>
+    </div>
+  );
+}
+
+export function Frame6() {
+  return (
+    <div className="bg-white relative shrink-0 w-full">
+      <div aria-hidden className="absolute border-[#2b3b63] border-b-2 border-solid inset-[0_0_-2px_0] pointer-events-none" />
+      <div className="content-stretch flex flex-col items-start px-[24px] relative size-full">
+        <Tab />
+      </div>
+    </div>
+  );
+}
+
+export function Frame7() {
+  return (
+    <div className="relative shrink-0 w-full">
+      <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] size-full">
+        <div className="bg-white relative shrink-0 w-full">
+          <div className="flex flex-row items-center size-full">
+            <div className="content-stretch flex items-center justify-between px-[24px] py-[9px] relative size-full">
+              <Frame4 />
+              <Frame3 />
+            </div>
+          </div>
+        </div>
+        <Frame6 />
+      </div>
+      <div aria-hidden className="absolute border-[#2b3b63] border-b-2 border-solid inset-0 pointer-events-none" />
+    </div>
+  );
+}
+
+export function Frame11() {
+  return (
+    <div className="bg-white flex-[1_0_0] min-w-px relative">
+      <div className="flex flex-row items-center size-full">
+        <div className="content-stretch flex items-center p-[10px] relative size-full">
+          <p className="[word-break:break-word] font-sans font-bold leading-[normal] not-italic relative shrink-0 text-[#5e6578] text-[12px] tracking-[0.72px] whitespace-nowrap">DELIVERY MANAGEMENT</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Frame12() {
+  return (
+    <div className="bg-white flex-[1_0_0] h-[49px] min-w-px relative">
+      <div className="flex flex-row items-center justify-end size-full">
+        <div className="content-stretch flex items-center justify-end px-[24px] py-[10px] relative size-full" />
+      </div>
+    </div>
+  );
+}
+
+export function Frame13({ activeTab }: { activeTab?: string }) {
   const navigate = useNavigate();
   return (
     <div className="bg-white relative shrink-0 w-full" data-name="Frame 13">
@@ -2190,25 +2554,19 @@ function Frame13({ activeTab }: { activeTab?: string }) {
             <div onClick={() => navigate('/deliveries/contracts')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
               <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Contracts' ? 'border-[#ff7048]' : 'border-white'}`} />
               <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Contracts' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
-                <p className="leading-[normal]">Contracts</p>
+                <p className="leading-[normal]">Work Orders</p>
               </div>
             </div>
             <div onClick={() => navigate('/deliveries/routes')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
-              <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Routes' ? 'border-[#ff7048]' : 'border-white'}`} />
-              <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Routes' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
+              <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Routes' || activeTab === 'RouteDetail' ? 'border-[#ff7048]' : 'border-white'}`} />
+              <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Routes' || activeTab === 'RouteDetail' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
                 <p className="leading-[normal]">Routes</p>
               </div>
             </div>
-            <div className="bg-white content-stretch flex items-center justify-center opacity-25 px-[24px] py-[16px] relative shrink-0" data-name="Tab">
-              <div aria-hidden className="absolute border-b-3 border-solid border-white inset-0 pointer-events-none" />
-              <div className="[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] text-center whitespace-nowrap">
-                <p className="leading-[normal]">Driver Schedule</p>
-              </div>
-            </div>
-            <div className="bg-white content-stretch flex items-center justify-center opacity-25 px-[24px] py-[16px] relative shrink-0" data-name="Tab">
-              <div aria-hidden className="absolute border-b-3 border-solid border-white inset-0 pointer-events-none" />
-              <div className="[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#5e6578] text-[14px] text-center whitespace-nowrap">
-                <p className="leading-[normal]">Map Views</p>
+            <div onClick={() => navigate('/deliveries/calendar')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
+              <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Calendar' ? 'border-[#ff7048]' : 'border-white'}`} />
+              <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Calendar' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
+                <p className="leading-[normal]">Calendar</p>
               </div>
             </div>
           </div>
@@ -2226,19 +2584,21 @@ export default function DeliveriesContract({ defaultTab = 'Contracts' }: { defau
     setActiveTab(defaultTab);
   }, [defaultTab]);
   return (
-    <TransportationProvider><div className="flex flex-col min-h-screen w-full" style={{ backgroundImage: "linear-gradient(90deg, rgba(43, 59, 99, 0.05) 0%, rgba(43, 59, 99, 0.05) 100%), linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%)" }} data-name="Deliveries - Contract">
-      <div className="content-stretch flex flex-col items-start w-full shrink-0" data-name="Navbar">
-        <Frame7 />
-        <Frame13 activeTab={activeTab} />
-      </div>
-      <div className="flex-1 w-full flex flex-col items-center">
-        {activeTab === 'Contracts' ? <Container /> : <RoutesContainer />}
-      </div>
-      <div className="bg-white border-[#e0e0e0] border-solid border-t h-[56px] w-full mt-[12px] shrink-0" data-name="CopyRight">
-        <div className="flex h-full font-sans font-normal justify-center items-center text-[#5e6578] text-[12px] whitespace-nowrap">
-          <p className="leading-[normal]">© 2024 - ShedPro. All rights reserved.</p>
+    <TransportationProvider>
+      <div className="flex flex-col min-h-screen w-full" style={{ backgroundImage: "linear-gradient(90deg, rgba(43, 59, 99, 0.05) 0%, rgba(43, 59, 99, 0.05) 100%), linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%)" }} data-name="Deliveries - Contract">
+        <div className="content-stretch flex flex-col items-start w-full shrink-0" data-name="Navbar">
+          <Frame7 />
+          <Frame13 activeTab={activeTab} />
+        </div>
+        <div className="flex-1 w-full flex flex-col items-center">
+          {activeTab === 'Calendar' ? <CalendarView /> : activeTab === 'RouteDetail' ? <RouteDetailPage /> : activeTab === 'Contracts' ? <WorkOrdersContainer /> : <RoutesContainer />}
+        </div>
+        <div className="bg-white border-[#e0e0e0] border-solid border-t h-[56px] w-full mt-[12px] shrink-0" data-name="CopyRight">
+          <div className="flex h-full font-sans font-normal justify-center items-center text-[#5e6578] text-[12px] whitespace-nowrap">
+            <p className="leading-[normal]">© 2024 - ShedPro. All rights reserved.</p>
+          </div>
         </div>
       </div>
-    </div>
+    </TransportationProvider>
   );
 }

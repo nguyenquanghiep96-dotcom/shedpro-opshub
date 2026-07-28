@@ -130,7 +130,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const INPUT_BASE = [
   'w-full border rounded-[6px] px-[12px]',
-  'h-[36px]',
+  'h-[40px]',
   'font-sans font-normal text-[#2B3B63] text-[14px]',
   'outline-none transition-colors bg-white',
   'placeholder:text-[#A0A4B0] placeholder:font-normal',
@@ -185,7 +185,7 @@ export function Select({ className = '', children, ...rest }: React.SelectHTMLAt
     <select
       className={[
         'w-full border border-[#D8DADF] rounded-[6px] px-[12px]',
-        'h-[36px]',
+        'h-[40px]',
         'font-sans font-normal text-[#2B3B63] text-[14px]',
         'outline-none focus:border-[#2B3B63] transition-colors bg-white',
         'cursor-pointer appearance-none',

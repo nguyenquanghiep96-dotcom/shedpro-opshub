@@ -360,19 +360,6 @@ function RoutesTitleSection({
       </div>
       
       <div className="content-stretch flex gap-[42px] items-center relative shrink-0">
-        <div className="bg-white relative rounded-[4px] shrink-0">
-          <div className="content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[10px] relative rounded-[inherit] size-full">
-            <div className="overflow-clip relative shrink-0 size-[16px]">
-              <div className="absolute inset-[0.06%_8.33%_-0.06%_8.33%]">
-                <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.3333 16.0007">
-                  <path d="M8 4.66733V0.306667C8.60867 0.537333 9.16867 0.892667 9.64333 1.36667L11.966 3.69067C12.4407 4.16467 12.796 4.72467 13.0267 5.33333H8.66667C8.29867 5.33333 8 5.03467 8 4.66733ZM13.3173 6.66733H8.66667C7.564 6.66733 6.66667 5.77 6.66667 4.66733V0.016C6.55933 0.00866667 6.452 0 6.34333 0H3.33333C1.49533 0.000666667 0 1.496 0 3.334V12.6673C0 14.5053 1.49533 16.0007 3.33333 16.0007H10C11.838 16.0007 13.3333 14.5053 13.3333 12.6673V6.99067C13.3333 6.882 13.3247 6.77467 13.3173 6.66733ZM9.138 12.338L8.06267 13.414C7.678 13.7987 7.172 13.9913 6.66667 13.9913C6.16133 13.9913 5.65533 13.7987 5.27067 13.414L4.19533 12.338C3.93467 12.0773 3.93467 11.6553 4.19533 11.3953C4.456 11.1347 4.87733 11.1347 5.138 11.3953L6 12.2573V9.32533C6 8.95733 6.298 8.65867 6.66667 8.65867C7.03533 8.65867 7.33333 8.95733 7.33333 9.32533V12.2573L8.19533 11.3953C8.456 11.1347 8.87733 11.1347 9.138 11.3953C9.39867 11.6553 9.39867 12.0773 9.138 12.338Z" fill="var(--fill-0, #5E6578)" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div aria-hidden className="absolute border border-[#5e6578] border-solid inset-0 pointer-events-none rounded-[4px]" />
-        </div>
-        
         <div className="content-stretch flex gap-[10px] items-center relative shrink-0">
           <p className="font-sans font-normal text-[#787e90] text-[14px] leading-[normal]">Page {currentPage} of {totalPages}</p>
           <div className="content-stretch flex items-center relative shrink-0" data-name="Page Control Group">

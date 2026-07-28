@@ -130,7 +130,7 @@ function WODetailPopup({ wo, onClose }: { wo: WorkOrder; onClose: () => void }) 
           {wo.note && <div className="col-span-2"><label className={lbl}>Note</label><p className={val}>{wo.note}</p></div>}
         </div>
         <div className="px-6 py-4 border-t border-[#e8eaed] flex justify-end">
-          <Btn variant="stroke" onClick={onClose}>Close</Btn>
+          <Btn variant="outline" onClick={onClose}>Close</Btn>
         </div>
       </div>
     </div>
@@ -140,16 +140,16 @@ function WODetailPopup({ wo, onClose }: { wo: WorkOrder; onClose: () => void }) 
 // ============================================================
 // ADD WORK ORDERS MODAL
 // ============================================================
-function AddWorkOrdersModal({ isOpen, onClose, onAdd, alreadyAdded }: {
-  isOpen: boolean; onClose: () => void; onAdd: (wo: WorkOrder) => void; alreadyAdded: string[];
+function AddWorkOrdersModal({ isOpen, onClose, onAdd, alreadyAdded, onViewWO }: {
+  isOpen: boolean; onClose: () => void; onAdd: (wo: WorkOrder) => void; alreadyAdded: string[]; onViewWO: (wo: WorkOrder) => void;
 }) {
   if (!isOpen) return null;
   const allWOs = MOCK_WORK_ORDERS;
-  const availableCount = allWOs.filter(wo => !alreadyAdded.includes(wo.id)).length;
+  const availableCount = allWOs.filter(wo => !alreadyAdded.includes(wo.id) && !wo.route).length;
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40" />
-      <div className="relative bg-white rounded-[10px] w-full max-w-[680px] max-h-[85vh] overflow-hidden shadow-xl mx-4 flex flex-col" onClick={e => e.stopPropagation()}>
+      <div className="relative bg-white rounded-[10px] w-full max-w-[720px] max-h-[85vh] overflow-hidden shadow-xl mx-4 flex flex-col" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#e8eaed]">
           <div className="flex items-baseline gap-2">
             <h2 className="font-sans font-bold text-[#2b3b63] text-[20px]">Add Work Orders</h2>
@@ -160,35 +160,55 @@ function AddWorkOrdersModal({ isOpen, onClose, onAdd, alreadyAdded }: {
         <div className="flex-1 overflow-y-auto">
           {allWOs.map(wo => {
             const isAdded = alreadyAdded.includes(wo.id);
+            const isOnOtherRoute = !isAdded && !!wo.route;
             const pickupAddr = wo.pickup ? getFullAddress(wo.pickup) : '';
             const dropoffAddr = wo.dropoff ? getFullAddress(wo.dropoff) : '';
             return (
-              <div key={wo.id} className="flex items-center gap-4 px-6 py-4 border-b border-[#f0f0f0] hover:bg-[#fafafa] transition-colors">
-                <div className="shrink-0 w-[100px]"><TypeBadge type={wo.type} /></div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-1">
-                    <span className="font-sans font-bold text-[#2b3b63] text-[14px]">{wo.buildingSize} {wo.buildingType}</span>
-                    <span className="font-sans text-[#787e90] text-[13px]"> · {wo.customer}</span>
+              <div key={wo.id} className={`px-6 py-3 border-b border-[#f0f0f0] transition-colors ${isOnOtherRoute ? 'opacity-60' : 'hover:bg-[#fafafa]'}`}>
+                {/* Row 1: Type badge + building + customer + WO ID + action */}
+                <div className="flex items-center gap-4">
+                  <div className="shrink-0 w-[120px]"><TypeBadge type={wo.type} /></div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline gap-1">
+                      <span className="font-sans font-bold text-[#2b3b63] text-[14px]">{wo.buildingSize} {wo.buildingType}</span>
+                      <span className="font-sans text-[#787e90] text-[13px]"> · {wo.customer}</span>
+                    </div>
                   </div>
-                  <p className="font-sans text-[#787e90] text-[12px] mt-[2px] truncate">
-                    {isMoveType(wo.type)
-                      ? `PICKUP: ${pickupAddr || wo.pickup} • DROPOFF: ${dropoffAddr || wo.dropoff}`
-                      : `VISIT: ${dropoffAddr || wo.dropoff}`}
-                  </p>
+                  <span className="shrink-0 font-sans font-semibold text-[#FF7048] text-[13px] w-[70px] text-right cursor-pointer hover:underline" onClick={() => onViewWO(wo)}>{wo.id}</span>
+                  <div className="shrink-0 w-[100px] text-right">
+                    {isAdded ? (
+                      <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#16A34A] border border-[#16A34A] rounded-[6px] px-[10px] py-[4px]">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#16A34A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        Added
+                      </span>
+                    ) : isOnOtherRoute ? (
+                      <span className="inline-block text-[12px] font-semibold text-[#a0a4b0] border border-[#d8dadf] rounded-[6px] px-[10px] py-[4px] cursor-not-allowed" title={`Assigned to ${wo.route}`}>On {wo.route}</span>
+                    ) : (
+                      <button onClick={() => onAdd(wo)} className="cursor-pointer text-[12px] font-semibold text-white bg-[#2B3B63] hover:bg-[#1a233b] rounded-[6px] px-[14px] py-[4px] transition-colors">Add</button>
+                    )}
+                  </div>
                 </div>
-                <span className="shrink-0 font-sans text-[#787e90] text-[13px] w-[70px] text-right">{wo.id}</span>
-                <div className="shrink-0 w-[90px] text-right">
-                  {isAdded ? (
-                    <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#16A34A] border border-[#16A34A] rounded-[6px] px-[10px] py-[4px]">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#16A34A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                      Added
-                    </span>
-                  ) : wo.route ? (
-                    <span className="inline-block text-[12px] font-semibold text-[#2B3B63] border border-[#2B3B63] rounded-[6px] px-[10px] py-[4px] cursor-pointer hover:bg-[#2B3B63] hover:text-white transition-colors" onClick={() => onAdd(wo)}>On {wo.route}</span>
-                  ) : (
-                    <button onClick={() => onAdd(wo)} className="cursor-pointer text-[12px] font-semibold text-[#2B3B63] border border-[#2B3B63] rounded-[6px] px-[10px] py-[4px] hover:bg-[#2B3B63] hover:text-white transition-colors">Add</button>
-                  )}
-                </div>
+                {/* Row 2: Address info with colored labels */}
+                {isMoveType(wo.type) ? (
+                  <div className="mt-1 flex flex-col gap-[2px] pl-[136px]">
+                    <div className="flex items-center gap-2">
+                      <div className="w-[6px] h-[6px] rounded-full bg-[#2B3B63] shrink-0" />
+                      <span className="font-sans font-bold text-[#2B3B63] text-[11px] uppercase w-[60px] shrink-0">Pickup</span>
+                      <span className="font-sans text-[#787e90] text-[12px] truncate">{pickupAddr || wo.pickup}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-[6px] h-[6px] rounded-full bg-[#FF7048] shrink-0" />
+                      <span className="font-sans font-bold text-[#FF7048] text-[11px] uppercase w-[60px] shrink-0">Dropoff</span>
+                      <span className="font-sans text-[#787e90] text-[12px] truncate">{dropoffAddr || wo.dropoff}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mt-1 flex items-center gap-2 pl-[136px]">
+                    <div className="w-[6px] h-[6px] rounded-full bg-[#16a34a] shrink-0" />
+                    <span className="font-sans font-bold text-[#16a34a] text-[11px] uppercase w-[60px] shrink-0">Visit</span>
+                    <span className="font-sans text-[#787e90] text-[12px] truncate">{dropoffAddr || wo.visit || wo.dropoff}</span>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -431,45 +451,51 @@ export default function RouteDetailPage() {
               Back
             </button>
 
-            {/* Title */}
+            {/* Title + Status Badge */}
             <div className="flex items-start justify-between mb-5">
-              <h1 className="text-[24px] font-bold text-[#2b3b63] leading-tight">{isNew ? 'Create New Route' : `Edit Route ${routeId}`}</h1>
               <div className="flex items-center gap-3">
-                <Btn variant="stroke">Save Draft</Btn>
-                <Btn variant="primary" onClick={() => navigate('/transportation/routes')}>{isNew ? 'Create Route' : 'Save'}</Btn>
+                <h1 className="text-[24px] font-bold text-[#2b3b63] leading-tight">{isNew ? 'Create New Route' : `Edit Route ${routeId}`}</h1>
+                <StatusBadge status={formStatus} />
               </div>
-            </div>
-
-            {/* Stats Box */}
-            <div className="border border-[#d8dadf] rounded-[6px] px-[24px] py-[16px] mb-6">
-              <div className="flex items-center justify-between flex-wrap gap-3">
-                <span className="text-[#2b3b63] text-[18px] font-bold">{routeId}</span>
-                <div className="flex items-center gap-3 flex-wrap">
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Stops</span>
-                    <span className="text-[#2b3b63] text-[14px] font-bold">{stops.length}</span>
-                  </div>
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Total Distance</span>
-                    <span className="text-[#2b3b63] text-[14px] font-bold">{totalDistance}</span>
-                  </div>
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Status</span>
-                    <select value={formStatus} onChange={e => setFormStatus(e.target.value)} className="text-[14px] font-bold text-[#2b3b63] bg-transparent border-none outline-none cursor-pointer mr-1">
-                      <option value="Draft">Draft</option>
-                      <option value="Scheduled">Scheduled</option>
-                      <option value="En Route">En Route</option>
-                      <option value="Completed">Completed</option>
-                    </select>
-                    <StatusBadge status={formStatus} />
-                  </div>
-                </div>
+              <div className="flex items-center gap-3">
+                <Btn variant="outline" onClick={() => navigate('/transportation/routes')}>Cancel</Btn>
+                {isNew && formStatus === 'Draft' && (
+                  <Btn variant="outline" onClick={() => navigate('/transportation/routes')}>Save Draft</Btn>
+                )}
+                <Btn variant="primary" onClick={() => navigate('/transportation/routes')}>
+                  {isNew ? 'Create Route' : 'Save Changes'}
+                </Btn>
               </div>
             </div>
 
             {/* Route Information */}
             <h3 className="text-[16px] font-bold text-[#2b3b63] mb-3">Route Information</h3>
-            <div className="border border-[#d8dadf] rounded-[6px] p-[24px] mb-6">
+            <div className="border border-[#d8dadf] rounded-[6px] mb-6">
+              {/* Stats row */}
+              <div className="flex items-center justify-between flex-wrap px-[24px] py-[16px] border-b border-[#e8eaed]">
+                <span className="text-[#2b3b63] text-[18px] font-bold">{routeId}</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
+                    <span className="text-[#787e90] text-[13px]">Stops</span>
+                    <span className="text-[#FF7048] text-[14px] font-bold">{stops.length}</span>
+                  </div>
+                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
+                    <span className="text-[#787e90] text-[13px]">Total Distance</span>
+                    <span className="text-[#FF7048] text-[14px] font-bold">{totalDistance}</span>
+                  </div>
+                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
+                    <span className="text-[#787e90] text-[13px]">Status</span>
+                    <select value={formStatus} onChange={e => setFormStatus(e.target.value)} className="text-[14px] font-bold text-[#2b3b63] bg-transparent border-none outline-none cursor-pointer">
+                      <option value="Draft">Draft</option>
+                      <option value="Scheduled">Scheduled</option>
+                      <option value="En Route">En Route</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              {/* Form fields */}
+              <div className="p-[24px]">
               <div className="grid grid-cols-2 gap-x-6 gap-y-4">
                 <div><FormLabel required>Owner Entity</FormLabel><Select value={formOwner} onChange={e => setFormOwner(e.target.value)}>{OWNER_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}</Select></div>
                 <div><FormLabel required>Assignee</FormLabel><Select value={formAssignee} onChange={e => setFormAssignee(e.target.value)}><option value="">Select driver...</option>{ASSIGNEE_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}</Select></div>
@@ -483,6 +509,7 @@ export default function RouteDetailPage() {
                 </div>
               </div>
               <div className="mt-4"><FormLabel>Route Note</FormLabel><Textarea value={formNote} onChange={e => setFormNote(e.target.value)} placeholder="Optional notes visible to dispatcher..." style={{ height: 80 }} /></div>
+              </div>
             </div>
 
             {/* Stops header */}
@@ -541,7 +568,7 @@ export default function RouteDetailPage() {
         </div>
       </div>
 
-      <AddWorkOrdersModal isOpen={showAddWOModal} onClose={() => setShowAddWOModal(false)} onAdd={handleAddWO} alreadyAdded={routeWOs.map(w => w.id)} />
+      <AddWorkOrdersModal isOpen={showAddWOModal} onClose={() => setShowAddWOModal(false)} onAdd={handleAddWO} alreadyAdded={routeWOs.map(w => w.id)} onViewWO={setViewingWO} />
       {viewingWO && <WODetailPopup wo={viewingWO} onClose={() => setViewingWO(null)} />}
     </div>
   );

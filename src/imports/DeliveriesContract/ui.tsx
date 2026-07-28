@@ -38,7 +38,7 @@ export const TOKEN = {
 //   danger     → red border  (Delete)
 //   link-navy  → navy border (Link Contract, Link Inventory)
 // ─────────────────────────────────────────────────────────────
-type BtnVariant = 'primary' | 'outline' | 'stroke' | 'ghost' | 'danger' | 'link-navy';
+type BtnVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'link-navy';
 
 interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: BtnVariant;
@@ -49,9 +49,8 @@ interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const BTN_VARIANT_CLASSES: Record<BtnVariant, string> = {
   'primary':   'bg-[#FF7048] hover:bg-[#FF8765] text-white border-transparent',
-  'outline':   'bg-[#EDEDED] hover:bg-[#E0E0E0] text-[#5E6578] border-transparent',
-  // Stroke: white bg, visible border, hover border darkens to #5E6578
-  'stroke':    'bg-white hover:bg-[#F5F5F5] text-[#5E6578] border-[#E0E0E0] hover:border-[#5E6578]',
+  'secondary': 'bg-[#EDEDED] hover:bg-[#E0E0E0] text-[#5E6578] border-transparent',
+  'outline':   'bg-white hover:bg-[#F5F5F5] text-[#5E6578] border-[#E0E0E0] hover:border-[#5E6578]',
   'ghost':     'bg-transparent hover:bg-[#f0f2f5] text-[#5E6578] border-transparent',
   'danger':    'bg-white hover:bg-[#FBEAEA] text-[#E53E3E] border-[#F1C9C9]',
   'link-navy': 'bg-white hover:bg-[#f0f2f5] text-[#2B3B63] border-[#2B3B63]',
@@ -322,7 +321,7 @@ export function StatusBadge({ status, className = '' }: { status: string; classN
   return (
     <span
       className={['font-sans font-semibold text-[11px] px-[8px] py-[2px] rounded-[4px] whitespace-nowrap', className].join(' ')}
-      style={{ color: s.text, backgroundColor: s.bg }}
+      style={{ color: s.text, backgroundColor: s.bg, letterSpacing: '0.01em' }}
     >
       {status}
     </span>
@@ -333,14 +332,29 @@ export function StatusBadge({ status, className = '' }: { status: string; classN
 // TYPE BADGE
 // ─────────────────────────────────────────────────────────────
 // Solid navy #2B3B63, white text — uniform for ALL WO types
+// Material Symbols Rounded icon mapping per WO type
 const TYPE_COLOR = '#2B3B63';
 
+const TYPE_ICON_MAP: Record<string, string> = {
+  'Delivery': 'delivery_truck_speed',
+  'Repo': 'house_with_shield',
+  'Lot Transfer': 'compare_arrows',
+  'Private Move': 'add_home',
+  'Repair': 'build',
+  'Welfare Check': 'data_check',
+  'Payment Collection': 'universal_currency',
+};
+
 export function TypeBadge({ type, className = '' }: { type: string; className?: string }) {
+  const iconName = TYPE_ICON_MAP[type];
   return (
     <span
-      className={['font-sans font-semibold text-[11px] px-[8px] py-[2px] rounded-[4px] whitespace-nowrap text-white', className].join(' ')}
-      style={{ backgroundColor: TYPE_COLOR }}
+      className={['inline-flex items-center gap-[4px] font-sans font-semibold text-[11px] px-[8px] py-[2px] rounded-[4px] whitespace-nowrap text-white', className].join(' ')}
+      style={{ backgroundColor: TYPE_COLOR, letterSpacing: '0.01em' }}
     >
+      {iconName && (
+        <span className="material-symbols-rounded" style={{ fontSize: 14, lineHeight: 1, fontVariationSettings: "'FILL' 0, 'wght' 600" }}>{iconName}</span>
+      )}
       {type}
     </span>
   );
@@ -409,6 +423,17 @@ export const Icons = {
   Trash: (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
       <path d="M1.75 3.5h10.5M5.25 3.5V2.333a.583.583 0 0 1 .583-.583h2.334a.583.583 0 0 1 .583.583V3.5M11.083 3.5l-.583 7.583a1.167 1.167 0 0 1-1.167 1.084H4.667A1.167 1.167 0 0 1 3.5 11.083L2.917 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  ),
+  Inventory: (props: any) => (
+    <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M22.1265 10.5804C22.3743 11.0756 22.9691 11.2777 23.4549 11.025C23.9406 10.7724 24.1389 10.1661 23.8911 9.67091L20.0844 1.94025L18.3099 2.84974L22.1166 10.5804M19.6283 3.91081L20.0844 1.94025L12.0051 0L11.549 1.97056L19.6383 3.92091M12.4611 1.97056L12.0051 0L3.91583 1.95035L4.37184 3.92091L12.4611 1.97056ZM5.6903 2.84974L3.91583 1.94025L0.10914 9.67091C-0.138691 10.1661 0.0595737 10.7724 0.545323 11.025C1.03107 11.2777 1.62587 11.0756 1.8737 10.5804L5.68039 2.84974" fill="currentColor"/>
+      <path d="M18.5676 4.2746L11.9951 2.61731L5.42263 4.2746L1.84394 12.0053V19.3216C1.84394 21.3528 3.4598 23 5.45237 23H18.5379C20.5304 23 22.1463 21.3528 22.1463 19.3216V12.0053L18.5676 4.2746ZM20.1736 19.3216C20.1736 20.2412 19.44 20.9789 18.5478 20.9789H16.2975V14.1982C16.2975 13.0866 15.4152 12.1872 14.3247 12.1872H9.69524C8.60478 12.1872 7.7225 13.0866 7.7225 14.1982V20.9789H5.47219C4.57009 20.9789 3.84642 20.2311 3.84642 19.3216V12.46L6.84022 6.01274L12.0249 4.70914L17.2095 6.01274L20.2033 12.46V19.3216H20.1736Z" fill="currentColor"/>
+    </svg>
+  ),
+  Contract: (props: any) => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M13.8564 1C14.1146 1 14.3631 1.09946 14.5518 1.28809C14.7401 1.46667 14.8388 1.71466 14.8389 1.98242C14.8389 2.25034 14.7402 2.49891 14.5518 2.6875C14.3731 2.87613 14.1245 2.97559 13.8564 2.97559H5.62598C4.91132 2.97568 4.2463 3.2537 3.75 3.75C3.2537 4.25623 2.97569 4.92124 2.97559 5.62598V18.3633C2.97559 19.0781 3.25361 19.7438 3.75 20.2402C4.24629 20.7266 4.9312 21.0145 5.62598 21.0146H14.6504V17.4502C14.6504 16.7057 14.9485 16.0009 15.4746 15.4648C16.0007 14.9288 16.7056 14.6407 17.46 14.6406H21.0244V10.1533C21.0244 10.0342 21.0441 9.91484 21.0938 9.80566C21.1434 9.67669 21.2133 9.55723 21.3125 9.45801C21.4911 9.26971 21.7391 9.17099 22.0068 9.1709L21.9971 9.18066C22.2651 9.18066 22.5135 9.28012 22.7021 9.46875C22.8807 9.65726 22.9901 9.91495 22.9902 10.1729V15.9609C22.9902 16.5665 22.8808 17.1626 22.6426 17.7285C22.4142 18.2943 22.0764 18.7908 21.6396 19.2275L19.2275 21.6494C18.8007 22.0763 18.2943 22.4141 17.7285 22.6523C17.1726 22.8807 16.5763 23 15.9707 23H5.63672C4.39574 23 3.234 22.5133 2.36035 21.6396C1.48671 20.766 1 19.6043 1 18.3633V5.61621C1.00006 4.38524 1.48692 3.22402 2.35059 2.36035C3.22413 1.48684 4.38518 1.0001 5.62598 1H13.8564ZM17.46 16.6367C17.2417 16.6368 17.0338 16.7261 16.875 16.8848C16.7162 17.0337 16.626 17.2523 16.626 17.4707V20.9346C17.0825 20.8155 17.4996 20.5775 17.8271 20.25L20.25 17.8271C20.508 17.5592 20.6972 17.2321 20.8262 16.8848V16.8945C20.8559 16.8053 20.9049 16.7259 20.9248 16.6367H17.46ZM20.9248 0.990234C21.4805 0.990361 22.0065 1.2087 22.3936 1.5957C22.7807 1.99282 22.999 2.50947 22.999 3.06543C22.9989 3.62123 22.7806 4.14707 22.3936 4.53418L11.3438 15.6035C10.9764 15.9609 10.5498 16.2497 10.0732 16.4482C9.59678 16.6467 9.09038 16.7461 8.57422 16.7461H7.26367V15.4355C7.26367 14.9194 7.36307 14.413 7.56152 13.9365C7.75015 13.46 8.03794 13.0324 8.40527 12.665L19.4551 1.5957C19.8522 1.20858 20.3689 0.990234 20.9248 0.990234Z" fill="currentColor"/>
     </svg>
   ),
   ChevronLeft: (

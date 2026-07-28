@@ -207,7 +207,7 @@ export default function CalendarView() {
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-7 flex-1 gap-[4px] px-[12px] pb-[12px]">
+          <div className="grid grid-cols-7 flex-1 px-[12px] pb-[12px]" style={{ borderCollapse: 'collapse' }}>
             {days.map((dayObj, i) => {
               const dateStr = dayObj.date.toDateString();
               const isToday = dateStr === todayStr;
@@ -221,9 +221,9 @@ export default function CalendarView() {
               return (
                 <div 
                   key={i} 
-                  className={`min-h-[140px] p-[8px] border rounded-[6px] ${isToday ? 'border-[#ff7048] bg-[#FFF6F2]' : 'border-[#e0e0e0] bg-white'}`} 
+                  className={`min-h-[140px] p-[8px] border-r border-b ${i % 7 === 0 ? 'border-l' : ''} ${i < 7 ? 'border-t' : ''} ${isToday ? 'border-[#ff7048] bg-[#FFF6F2]' : 'border-[#e0e0e0] bg-white'}`} 
                   onDragOver={(e) => e.preventDefault()} 
-                  onDrop={(e) => { const routeId = e.dataTransfer.getData('routeId'); if(routeId) setDragConfirm({ routeId, date: dayObj.date }); }}
+                  onDrop={(e) => { const routeId = e.dataTransfer.getData('routeId'); if(routeId) { updateRouteDate(routeId, dayObj.date); } }}
                 >
                   <div className={`mb-2 text-right ${isToday ? 'text-[#ff7048] font-bold' : (dayObj.isCurrentMonth ? 'text-[#5e6578]' : 'text-[#c0c0c0]')} text-[13px] font-semibold`}>
                     {dayObj.date.getDate()}
@@ -246,7 +246,7 @@ export default function CalendarView() {
                           />
                           <div className="pl-[6px] flex justify-between items-center mb-1">
                             <span className="text-[#2b3b63] text-[12px] font-bold">{route.id}</span>
-                            <StatusBadge status={route.status} className="uppercase !text-[9px] !px-[4px] !py-[2px]" />
+                            <StatusBadge status={route.status} className="!text-[9px] !px-[4px] !py-[2px]" />
                           </div>
                           <div className="pl-[6px] text-[#787e90] text-[11px] truncate font-medium">{route.assignee || 'Unassigned'}</div>
                           {/* WO badges */}
@@ -254,8 +254,8 @@ export default function CalendarView() {
                             {woData.slice(0, 3).map(wo => (
                               <div key={wo.woId} className="flex items-center gap-[3px] text-[9px]">
                                 <div style={{ width: 4, height: 4, borderRadius: '50%', backgroundColor: TYPE_COLORS[wo.woType] || '#5e6578', flexShrink: 0 }} />
-                                <span className="font-semibold text-[#2b3b63]">{wo.woId}</span>
-                                <span className="text-[#787e90] truncate">{wo.building} · {wo.serial}</span>
+                                <span className="font-semibold text-[#2b3b63] text-[11px]">{wo.woId}</span>
+                                <span className="text-[#787e90] truncate text-[11px]">{wo.building}</span>
                               </div>
                             ))}
                             {woData.length > 3 && (
@@ -281,7 +281,7 @@ export default function CalendarView() {
             <div className="flex justify-between items-start mb-3">
               <div className="flex items-center gap-2">
                 <h3 className="text-[20px] font-bold text-[#2b3b63]">{selectedRoute.id}</h3>
-                <StatusBadge status={selectedRoute.status} className="uppercase" />
+                <StatusBadge status={selectedRoute.status} />
               </div>
               <button 
                 onClick={() => setSelectedRoute(null)}
@@ -292,71 +292,73 @@ export default function CalendarView() {
             </div>
             <p className="text-[#787e90] text-[13px] mb-4">Route D · {selectedRoute.assignee || 'Unassigned'}</p>
             
-            <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-[13px]">
-              <div>
-                <div className="text-[#94a3b8] text-[11px] font-semibold uppercase mb-1">Scheduled</div>
-                <div className="text-[#2b3b63] font-medium">{selectedRoute.scheduledDate?.split(' ').slice(0, 3).join(' ')}</div>
+            <div className="flex flex-col gap-[10px] text-[13px]">
+              <div className="flex items-baseline">
+                <span className="text-[#94a3b8] w-[120px] shrink-0">Scheduled</span>
+                <span className="text-[#2b3b63] font-medium">{selectedRoute.scheduledDate?.split(' ').slice(0, 3).join(' ')}</span>
               </div>
-              <div>
-                <div className="text-[#94a3b8] text-[11px] font-semibold uppercase mb-1">Dispatched by</div>
-                <div className="text-[#2b3b63] font-medium">Shagiras Yusif</div>
+              <div className="flex items-baseline">
+                <span className="text-[#94a3b8] w-[120px] shrink-0">Dispatched by</span>
+                <span className="text-[#2b3b63] font-medium">Shagiras Yusif</span>
               </div>
-              <div>
-                <div className="text-[#94a3b8] text-[11px] font-semibold uppercase mb-1">Owner Entity</div>
-                <div className="text-[#2b3b63] font-medium">Rose Mfrd (Roses Duo)</div>
+              <div className="flex items-baseline">
+                <span className="text-[#94a3b8] w-[120px] shrink-0">Owner Entity</span>
+                <span className="text-[#2b3b63] font-medium">Rose Mfrd (Roses Duo)</span>
               </div>
-              <div>
-                <div className="text-[#94a3b8] text-[11px] font-semibold uppercase mb-1">Support Phone</div>
-                <div className="text-[#2b3b63] font-medium">(540) 555-0113</div>
+              <div className="flex items-baseline">
+                <span className="text-[#94a3b8] w-[120px] shrink-0">Support Phone</span>
+                <span className="text-[#2b3b63] font-medium">(540) 555-0113</span>
               </div>
-              <div className="col-span-2">
-                <div className="text-[#94a3b8] text-[11px] font-semibold uppercase mb-1">Start Address</div>
-                <div className="text-[#2b3b63] font-medium">3210 S Main St, Harrisonburg, VA 22801</div>
+              <div className="flex items-baseline">
+                <span className="text-[#94a3b8] w-[120px] shrink-0">Start Address</span>
+                <span className="text-[#2b3b63] font-medium">3210 S Main St, Harrisonburg, VA 22801</span>
               </div>
-              <div>
-                <div className="text-[#94a3b8] text-[11px] font-semibold uppercase mb-1">Distance</div>
-                <div className="text-[#2b3b63] font-medium">{selectedRoute.distance || '0 mi'}</div>
+              <div className="flex items-baseline">
+                <span className="text-[#94a3b8] w-[120px] shrink-0">Distance</span>
+                <span className="text-[#2b3b63] font-medium">{selectedRoute.distance || '0 mi'}</span>
               </div>
-              <div>
-                <div className="text-[#94a3b8] text-[11px] font-semibold uppercase mb-1">Stops</div>
-                <div className="text-[#2b3b63] font-medium">{selectedRoute.stops} stops · {(ROUTE_WO_DATA[selectedRoute.id] || []).length} WOs</div>
+              <div className="flex items-baseline">
+                <span className="text-[#94a3b8] w-[120px] shrink-0">Stops</span>
+                <span className="text-[#2b3b63] font-medium">{selectedRoute.stops} stops · {(ROUTE_WO_DATA[selectedRoute.id] || []).length} WOs</span>
               </div>
             </div>
           </div>
 
           {/* Stops */}
           <div className="flex-1 overflow-y-auto px-6 py-4">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col">
               {(MOCK_STOPS[selectedRoute.id] || []).map((stop, idx) => {
                 const roleColor = ROLE_COLORS[stop.role] || '#5e6578';
+                const isStart = stop.role === 'START';
+                const attachedWOs = stop.woId ? [{ woId: stop.woId, woType: stop.woType, building: stop.building, serial: stop.serial }] : [];
                 return (
-                  <div key={idx} className="bg-white border border-[#e0e0e0] rounded-[8px] p-4 flex flex-col gap-2">
-                    <div className="flex justify-between items-start">
-                      <div className="flex items-center gap-2">
-                        <span 
-                          className="text-[10px] font-bold uppercase px-[6px] py-[2px] rounded-[4px]"
-                          style={{ color: roleColor, backgroundColor: `${roleColor}15` }}
-                        >
-                          {stop.role}
-                        </span>
-                        <span className="font-bold text-[#2b3b63] text-[14px]">{stop.location}</span>
+                  <div key={idx}>
+                    {/* Stop card — compact */}
+                    <div className="rounded-[8px] border border-[#e0e0e0] overflow-hidden bg-white px-3 py-[10px]">
+                      <div className="flex items-center gap-[6px] mb-[3px]">
+                        <span className="w-[20px] h-[20px] rounded-[5px] flex items-center justify-center text-[10px] font-bold text-white shrink-0" style={{ backgroundColor: roleColor }}>{stop.seq}</span>
+                        <span className="text-[10px] font-bold uppercase px-[5px] py-[1px] rounded-[3px]" style={{ color: roleColor, backgroundColor: `${roleColor}15` }}>{stop.role}</span>
+                        {!isStart && (
+                          <div className="ml-auto shrink-0"><StatusBadge status={selectedRoute.status} /></div>
+                        )}
                       </div>
-                      {stop.role !== 'START' && (
-                        <StatusBadge status={selectedRoute.status} className="uppercase !text-[9px]" />
+                      <div className="text-[13px] font-bold text-[#2b3b63] truncate">{stop.location}</div>
+                      <div className="text-[#787e90] text-[12px] truncate">{stop.address}</div>
+                      {attachedWOs.length > 0 && (
+                        <div className="flex flex-col gap-[4px] mt-[6px] pt-[6px] border-t border-dashed border-[#e0e0e0]">
+                          {attachedWOs.map(wo => (
+                            <div key={wo.woId} className="flex items-center rounded-[5px] py-[4px] px-[8px] border border-[#e8eaed] gap-[6px] min-w-0">
+                              <span className="px-[5px] py-[1px] rounded-[3px] text-[10px] font-semibold text-white shrink-0" style={{ backgroundColor: '#2B3B63' }}>{wo.woType}</span>
+                              <span className="text-[#2b3b63] text-[12px] font-medium truncate">{wo.building} · {wo.serial}</span>
+                            </div>
+                          ))}
+                        </div>
                       )}
                     </div>
-                    <div className="text-[#787e90] text-[13px]">{stop.address}</div>
-                    {stop.woId && (
-                      <div className="mt-1 pt-2 border-t border-[#e0e0e0] border-dashed">
-                        <div className="flex items-center gap-2 text-[12px]">
-                          <span className="font-semibold text-[#2b3b63]">{stop.woId}</span>
-                          <span className="px-[5px] py-[1px] rounded-[3px] text-[10px] font-semibold" style={{ color: TYPE_COLORS[stop.woType || ''] || '#5e6578', backgroundColor: `${TYPE_COLORS[stop.woType || ''] || '#5e6578'}15` }}>
-                            {stop.woType}
-                          </span>
-                        </div>
-                        {stop.building && (
-                          <div className="text-[12px] text-[#787e90] mt-1">{stop.building} · {stop.serial}</div>
-                        )}
+                    {/* Connector */}
+                    {idx < (MOCK_STOPS[selectedRoute.id] || []).length - 1 && (
+                      <div className="py-[3px] ml-[12px]">
+                        <div className="w-[2px] h-[10px] bg-[#e0e0e0] mx-auto" />
                       </div>
                     )}
                   </div>

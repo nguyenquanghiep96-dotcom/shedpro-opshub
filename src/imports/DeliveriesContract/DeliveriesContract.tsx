@@ -2551,19 +2551,19 @@ export function Frame13({ activeTab }: { activeTab?: string }) {
         <div className="content-stretch flex items-center px-[24px] relative size-full">
           <Frame11 />
           <div className="bg-white content-stretch flex items-center flex-nowrap relative shrink-0 w-full flex-1 md:justify-center flex-nowrap hide-scrollbar" data-name="Nav">
-            <div onClick={() => navigate('/deliveries/contracts')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
+            <div onClick={() => navigate('/transportation/workorders')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
               <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Contracts' ? 'border-[#ff7048]' : 'border-white'}`} />
               <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Contracts' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
                 <p className="leading-[normal]">Work Orders</p>
               </div>
             </div>
-            <div onClick={() => navigate('/deliveries/routes')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
+            <div onClick={() => navigate('/transportation/routes')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
               <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Routes' || activeTab === 'RouteDetail' ? 'border-[#ff7048]' : 'border-white'}`} />
               <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Routes' || activeTab === 'RouteDetail' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
                 <p className="leading-[normal]">Routes</p>
               </div>
             </div>
-            <div onClick={() => navigate('/deliveries/calendar')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
+            <div onClick={() => navigate('/transportation/calendar')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
               <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Calendar' ? 'border-[#ff7048]' : 'border-white'}`} />
               <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Calendar' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
                 <p className="leading-[normal]">Calendar</p>

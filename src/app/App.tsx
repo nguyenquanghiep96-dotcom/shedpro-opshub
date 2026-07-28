@@ -7,14 +7,14 @@ export default function App() {
     <BrowserRouter>
       <ErrorBoundary>
         <Routes>
-          <Route path="/deliveries/contracts" element={<DeliveriesContract defaultTab="Contracts" />} />
-          <Route path="/deliveries/routes" element={<DeliveriesContract defaultTab="Routes" />} />
-          <Route path="/deliveries/routes/create" element={<DeliveriesContract defaultTab="RouteDetail" />} />
-          <Route path="/deliveries/routes/:id/edit" element={<DeliveriesContract defaultTab="RouteDetail" />} />
-          <Route path="/deliveries/calendar" element={<DeliveriesContract defaultTab="Calendar" />} />
-          <Route path="/" element={<Navigate to="/deliveries/contracts" replace />} />
-          <Route path="/deliveries" element={<Navigate to="/deliveries/contracts" replace />} />
-          <Route path="*" element={<Navigate to="/deliveries/contracts" replace />} />
+          <Route path="/transportation/workorders" element={<DeliveriesContract defaultTab="Contracts" />} />
+          <Route path="/transportation/routes" element={<DeliveriesContract defaultTab="Routes" />} />
+          <Route path="/transportation/routes/create" element={<DeliveriesContract defaultTab="RouteDetail" />} />
+          <Route path="/transportation/routes/:id/edit" element={<DeliveriesContract defaultTab="RouteDetail" />} />
+          <Route path="/transportation/calendar" element={<DeliveriesContract defaultTab="Calendar" />} />
+          <Route path="/" element={<Navigate to="/transportation/workorders" replace />} />
+          <Route path="/transportation" element={<Navigate to="/transportation/workorders" replace />} />
+          <Route path="*" element={<Navigate to="/transportation/workorders" replace />} />
         </Routes>
       </ErrorBoundary>
     </BrowserRouter>

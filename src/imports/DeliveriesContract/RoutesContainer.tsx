@@ -80,7 +80,7 @@ function ButtonsContainer() {
   const navigate = useNavigate();
   return (
     <div className="content-stretch flex gap-[10px] items-start relative shrink-0 w-auto" data-name="Buttons Container">
-      <Btn variant="primary" icon={Icons.Add} onClick={() => navigate('/deliveries/routes/create')}>
+      <Btn variant="primary" icon={Icons.Add} onClick={() => navigate('/transportation/routes/create')}>
         New Route
       </Btn>
     </div>
@@ -317,7 +317,7 @@ function RoutesTableItem({ id, assignee, workOrders, stops, distance, scheduledD
       </div>
       
       <div className="content-stretch flex gap-[4px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[80px]">
-        <div onClick={() => navigate(`/deliveries/routes/${id}/edit`)} className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors"><svg className="shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.333 2a2.121 2.121 0 0 1 3 3L5.667 13.667l-4 1 1-4L11.333 2z" stroke="#2B3B63" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg></div>
+        <div onClick={() => navigate(`/transportation/routes/${id}/edit`)} className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors"><svg className="shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.333 2a2.121 2.121 0 0 1 3 3L5.667 13.667l-4 1 1-4L11.333 2z" stroke="#2B3B63" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg></div>
         <div className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors"><svg className="shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M5.333 4V2.667A1.333 1.333 0 0 1 6.667 1.333h2.666A1.333 1.333 0 0 1 10.667 2.667V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z" stroke="#2B3B63" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg></div>
       </div>
     </div>

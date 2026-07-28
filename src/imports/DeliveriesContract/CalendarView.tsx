@@ -373,7 +373,7 @@ export default function CalendarView() {
           {/* Edit Route button */}
           <div className="px-6 py-4 border-t border-[#e0e0e0]">
             <button 
-              onClick={() => navigate(`/deliveries/routes/${selectedRoute.id}/edit`)}
+              onClick={() => navigate(`/transportation/routes/${selectedRoute.id}/edit`)}
               className="w-full bg-[#ff7048] hover:bg-[#e5603a] text-white font-bold py-[10px] rounded-[6px] transition-colors cursor-pointer text-[14px] flex items-center justify-center gap-2"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9.917 1.75a1.856 1.856 0 0 1 2.625 2.625L4.958 11.958l-3.5.875.875-3.5L9.917 1.75z" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>

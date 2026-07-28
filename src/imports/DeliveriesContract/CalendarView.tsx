@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { RouteData, ASSIGNEE_OPTIONS, ROUTE_STATUS_COLORS } from './transportationData';
 import { useTransportation } from './TransportationContext';
-import { StatusBadge } from './ui';
+import { StatusBadge, Btn } from './ui';
 
 // WO data attached to each route for calendar card display
 const ROUTE_WO_DATA: Record<string, Array<{woId: string, woType: string, building: string, serial: string}>> = {
@@ -73,6 +73,7 @@ export default function CalendarView() {
   const [assigneeFilter, setAssigneeFilter] = useState<string[]>(['All']);
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
+  const [dragConfirm, setDragConfirm] = useState<{routeId: string, date: Date} | null>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -222,7 +223,7 @@ export default function CalendarView() {
                   key={i} 
                   className={`min-h-[140px] p-[8px] border rounded-[6px] ${isToday ? 'border-[#ff7048] bg-[#FFF6F2]' : 'border-[#e0e0e0] bg-white'}`} 
                   onDragOver={(e) => e.preventDefault()} 
-                  onDrop={(e) => { const routeId = e.dataTransfer.getData('routeId'); if(routeId) updateRouteDate(routeId, dayObj.date); }}
+                  onDrop={(e) => { const routeId = e.dataTransfer.getData('routeId'); if(routeId) setDragConfirm({ routeId, date: dayObj.date }); }}
                 >
                   <div className={`mb-2 text-right ${isToday ? 'text-[#ff7048] font-bold' : (dayObj.isCurrentMonth ? 'text-[#5e6578]' : 'text-[#c0c0c0]')} text-[13px] font-semibold`}>
                     {dayObj.date.getDate()}
@@ -345,7 +346,6 @@ export default function CalendarView() {
                       )}
                     </div>
                     <div className="text-[#787e90] text-[13px]">{stop.address}</div>
-                    
                     {stop.woId && (
                       <div className="mt-1 pt-2 border-t border-[#e0e0e0] border-dashed">
                         <div className="flex items-center gap-2 text-[12px]">
@@ -383,6 +383,24 @@ export default function CalendarView() {
         </div>
       )}
 
+      {/* Drag Confirm Modal */}
+      {dragConfirm && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[10px] shadow-xl w-full max-w-[400px] p-6">
+            <h3 className="text-[#2b3b63] text-[20px] font-bold mb-2">Move Route?</h3>
+            <p className="text-[#5e6578] text-[14px] mb-6">
+              Are you sure you want to move <span className="font-bold">{dragConfirm.routeId}</span> to <span className="font-bold">{dragConfirm.date.toDateString()}</span>?
+            </p>
+            <div className="flex justify-end gap-3">
+              <Btn variant="outline" onClick={() => setDragConfirm(null)}>Cancel</Btn>
+              <Btn variant="primary" onClick={() => {
+                updateRouteDate(dragConfirm.routeId, dragConfirm.date);
+                setDragConfirm(null);
+              }}>Confirm</Btn>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

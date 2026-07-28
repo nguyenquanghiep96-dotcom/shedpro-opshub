@@ -116,14 +116,22 @@ function Tag() {
   );
 }
 
-function RoutesActionBar() {
+function RoutesActionBar({ filterTabs, activeFilter, onFilterChange }: {
+  filterTabs: FilterTab[];
+  activeFilter: string;
+  onFilterChange: (v: string) => void;
+}) {
   return (
     <div className="content-stretch flex flex-col items-start py-[10px] relative shrink-0 w-full ">
       <div className="bg-white content-stretch flex flex-col gap-[10px] items-start p-[16px] relative rounded-[10px] shrink-0 w-full">
         <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid inset-0 pointer-events-none rounded-[10px]" />
         <div className="content-stretch flex items-center flex-wrap gap-y-4 relative shrink-0 w-full" data-name="Actions">
           <ButtonsContainer />
-          <Tag />
+          <FilterTabGroup
+            tabs={filterTabs}
+            active={activeFilter}
+            onChange={onFilterChange}
+          />
           <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full md:w-auto flex-1 md:flex-none flex-wrap">
             <SortSection />
           </div>
@@ -375,15 +383,31 @@ function RoutesTitleSection({
 
 export default function RoutesContainer() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeFilter, setActiveFilter] = useState('All');
   const itemsPerPage = 20;
   
-  const filteredRoutes = MOCK_ROUTES;
+  const filteredRoutes = activeFilter === 'All' 
+    ? MOCK_ROUTES 
+    : MOCK_ROUTES.filter(route => route.status === activeFilter);
+    
+  const filterTabs = [
+    { label: 'All', value: 'All', count: MOCK_ROUTES.length },
+    { label: 'Draft', value: 'Draft', count: MOCK_ROUTES.filter(r => r.status === 'Draft').length },
+    { label: 'Scheduled', value: 'Scheduled', count: MOCK_ROUTES.filter(r => r.status === 'Scheduled').length },
+    { label: 'En Route', value: 'En Route', count: MOCK_ROUTES.filter(r => r.status === 'En Route').length },
+    { label: 'Completed', value: 'Completed', count: MOCK_ROUTES.filter(r => r.status === 'Completed').length },
+  ];
+
   const totalPages = Math.ceil(filteredRoutes.length / itemsPerPage) || 1;
   const paginatedRoutes = filteredRoutes.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div className="content-stretch flex flex-col items-center w-full px-4 lg:px-[24px]" data-name="Routes Container">
-      <RoutesActionBar />
+      <RoutesActionBar 
+        filterTabs={filterTabs} 
+        activeFilter={activeFilter} 
+        onFilterChange={(v) => { setActiveFilter(v); setCurrentPage(1); }} 
+      />
       <div className="bg-white content-stretch flex flex-col items-start px-[12px] relative rounded-[10px] shrink-0 w-full">
         <RoutesTitleSection 
           totalItems={filteredRoutes.length}

@@ -198,16 +198,15 @@ export default function CalendarView() {
         </div>
 
         {/* Calendar Grid */}
-        <style>{`.day-scroll::-webkit-scrollbar { display: none; }`}</style>
-        <div className="flex-1 overflow-hidden bg-white flex flex-col gap-[16px] pt-[16px]">
-          <div className="grid grid-cols-7 gap-[4px] px-[12px] shrink-0">
+        <div className="flex-1 overflow-auto bg-white flex flex-col gap-[16px] pt-[16px]">
+          <div className="grid grid-cols-7 gap-[4px] px-[12px]">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
               <div key={day} className="text-[#787e90] text-[12px] font-semibold uppercase text-center">
                 {day}
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-7 grid-rows-6 flex-1 gap-[4px] px-[12px] pb-[12px] min-h-0">
+          <div className="grid grid-cols-7 flex-1 gap-[4px] px-[12px] pb-[12px]">
             {days.map((dayObj, i) => {
               const dateStr = dayObj.date.toDateString();
               const isToday = dateStr === todayStr;
@@ -221,14 +220,14 @@ export default function CalendarView() {
               return (
                 <div 
                   key={i} 
-                  className={`flex flex-col min-h-0 p-[8px] border rounded-[6px] ${isToday ? 'border-[#ff7048] bg-[#FFF6F2]' : 'border-[#e0e0e0] bg-white'}`} 
+                  className={`min-h-[140px] p-[8px] border rounded-[6px] ${isToday ? 'border-[#ff7048] bg-[#FFF6F2]' : 'border-[#e0e0e0] bg-white'}`} 
                   onDragOver={(e) => e.preventDefault()} 
                   onDrop={(e) => { const routeId = e.dataTransfer.getData('routeId'); if(routeId) updateRouteDate(routeId, dayObj.date); }}
                 >
-                  <div className={`mb-2 text-right shrink-0 ${isToday ? 'text-[#ff7048] font-bold' : (dayObj.isCurrentMonth ? 'text-[#5e6578]' : 'text-[#c0c0c0]')} text-[13px] font-semibold`}>
+                  <div className={`mb-2 text-right ${isToday ? 'text-[#ff7048] font-bold' : (dayObj.isCurrentMonth ? 'text-[#5e6578]' : 'text-[#c0c0c0]')} text-[13px] font-semibold`}>
                     {dayObj.date.getDate()}
                   </div>
-                  <div className="flex-1 overflow-y-auto flex flex-col gap-2 day-scroll min-h-0" style={{ scrollbarWidth: 'none' }}>
+                  <div className="flex flex-col gap-2">
                     {dayRoutes.map(route => {
                       const woData = ROUTE_WO_DATA[route.id] || [];
                       const brandColor = ROUTE_STATUS_COLORS[route.status] || '#5e6578';

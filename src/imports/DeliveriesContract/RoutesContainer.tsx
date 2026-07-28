@@ -125,25 +125,6 @@ function RoutesActionBar() {
           <ButtonsContainer />
           <Tag />
           <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full md:w-auto flex-1 md:flex-none flex-wrap">
-            <div className="bg-white content-stretch flex items-center px-[10px] py-[6px] relative rounded-[4px] shrink-0 w-[80px]">
-              <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-normal justify-center leading-[0] min-w-px not-italic relative text-[#787e90] text-[12px] whitespace-nowrap">
-                <p className="leading-[normal]">2026</p>
-              </div>
-              <div className="overflow-clip relative shrink-0 size-[16px]">
-                <div className="absolute flex inset-[22.92%_24.14%_22.92%_28.31%] items-center justify-center" style={{ containerType: "size" }}>
-                  <div className="-rotate-90 flex-none h-[100cqw] w-[100cqh]">
-                    <div className="relative size-full">
-                      <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 10.833 9.51167">
-                        <g>
-                          <path d={svgPaths.p1c74a480} fill="var(--fill-0, #787E91)" id="Vector" />
-                        </g>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div aria-hidden className="absolute border-[#ddd] border-solid inset-0 pointer-events-none rounded-[4px]" />
-            </div>
             <SortSection />
           </div>
         </div>

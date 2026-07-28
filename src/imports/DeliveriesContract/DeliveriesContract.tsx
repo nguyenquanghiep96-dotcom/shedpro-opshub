@@ -2585,18 +2585,13 @@ export default function DeliveriesContract({ defaultTab = 'Contracts' }: { defau
   }, [defaultTab]);
   return (
     <TransportationProvider>
-      <div className="flex flex-col h-screen overflow-hidden w-full" style={{ backgroundImage: "linear-gradient(90deg, rgba(43, 59, 99, 0.05) 0%, rgba(43, 59, 99, 0.05) 100%), linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%)" }} data-name="Deliveries - Contract">
+      <div className="flex flex-col min-h-screen w-full" style={{ backgroundImage: "linear-gradient(90deg, rgba(43, 59, 99, 0.05) 0%, rgba(43, 59, 99, 0.05) 100%), linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%)" }} data-name="Deliveries - Contract">
         <div className="content-stretch flex flex-col items-start w-full shrink-0" data-name="Navbar">
           <Frame7 />
           <Frame13 activeTab={activeTab} />
         </div>
-        <div className="flex-1 min-h-0 w-full overflow-y-auto flex flex-col items-center">
+        <div className="flex-1 w-full flex flex-col items-center">
           {activeTab === 'Calendar' ? <CalendarView /> : activeTab === 'RouteDetail' ? <RouteDetailPage /> : activeTab === 'Contracts' ? <WorkOrdersContainer /> : <RoutesContainer />}
-        </div>
-        <div className="bg-white border-[#e0e0e0] border-solid border-t h-[56px] w-full shrink-0" data-name="CopyRight">
-          <div className="flex h-full font-sans font-normal justify-center items-center text-[#5e6578] text-[12px] whitespace-nowrap">
-            <p className="leading-[normal]">© 2024 - ShedPro. All rights reserved.</p>
-          </div>
         </div>
       </div>
     </TransportationProvider>

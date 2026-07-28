@@ -119,7 +119,7 @@ function WOActionBar({ filterTabs, activeFilter, onFilterChange, onAddNew }: {
             active={activeFilter}
             onChange={onFilterChange}
           />
-          <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 flex-1">
+          <div className="content-stretch flex gap-[12px] items-center justify-end relative shrink-0 w-full md:w-auto flex-1 md:flex-none flex-wrap">
             <Btn variant="outline" icon={Icons.Filter}>
               Advanced Search
             </Btn>

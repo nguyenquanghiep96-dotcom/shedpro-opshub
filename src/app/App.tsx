@@ -10,6 +10,7 @@ export default function App() {
           <Route path="/transportation/workorders" element={<DeliveriesContract defaultTab="Contracts" />} />
           <Route path="/transportation/routes" element={<DeliveriesContract defaultTab="Routes" />} />
           <Route path="/transportation/routes/create" element={<DeliveriesContract defaultTab="RouteDetail" />} />
+          <Route path="/transportation/routes/:id" element={<DeliveriesContract defaultTab="RouteView" />} />
           <Route path="/transportation/routes/:id/edit" element={<DeliveriesContract defaultTab="RouteDetail" />} />
           <Route path="/transportation/calendar" element={<DeliveriesContract defaultTab="Calendar" />} />
           <Route path="/" element={<Navigate to="/transportation/workorders" replace />} />

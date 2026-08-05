@@ -4,6 +4,7 @@ import RoutesContainer from './RoutesContainer';
 import WorkOrdersContainer from './WorkOrdersContainer';
 import CalendarView from './CalendarView';
 import RouteDetailPage from './RouteDetailPage';
+import RouteViewPage from './RouteViewPage';
 import { TransportationProvider } from './TransportationContext';
 import svgPaths from "./svg-er6yqlh6e7";
 import imgThumbnail from "./71d7f36a3fe4c842bd190a79c3b92a977e1a20e0.png";
@@ -2558,8 +2559,8 @@ export function Frame13({ activeTab }: { activeTab?: string }) {
               </div>
             </div>
             <div onClick={() => navigate('/transportation/routes')} className="cursor-pointer bg-white content-stretch flex items-center justify-center px-[24px] py-[16px] relative shrink-0" data-name="Tab">
-              <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Routes' || activeTab === 'RouteDetail' ? 'border-[#ff7048]' : 'border-white'}`} />
-              <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Routes' || activeTab === 'RouteDetail' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
+              <div aria-hidden className={`absolute border-b-3 border-solid inset-0 pointer-events-none ${activeTab === 'Routes' || activeTab === 'RouteDetail' || activeTab === 'RouteView' ? 'border-[#ff7048]' : 'border-white'}`} />
+              <div className={`[word-break:break-word] flex flex-col font-sans font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-center whitespace-nowrap ${activeTab === 'Routes' || activeTab === 'RouteDetail' || activeTab === 'RouteView' ? 'text-[#ff7048]' : 'text-[#5e6578]'}`}>
                 <p className="leading-[normal]">Routes</p>
               </div>
             </div>
@@ -2591,7 +2592,7 @@ export default function DeliveriesContract({ defaultTab = 'Contracts' }: { defau
           <Frame13 activeTab={activeTab} />
         </div>
         <div className="flex-1 w-full flex flex-col items-center">
-          {activeTab === 'Calendar' ? <CalendarView /> : activeTab === 'RouteDetail' ? <RouteDetailPage /> : activeTab === 'Contracts' ? <WorkOrdersContainer /> : <RoutesContainer />}
+          {activeTab === 'Calendar' ? <CalendarView /> : activeTab === 'RouteDetail' ? <RouteDetailPage /> : activeTab === 'RouteView' ? <RouteViewPage /> : activeTab === 'Contracts' ? <WorkOrdersContainer /> : <RoutesContainer />}
         </div>
       </div>
     </TransportationProvider>

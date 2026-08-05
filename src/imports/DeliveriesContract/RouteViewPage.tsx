@@ -224,7 +224,7 @@ function AddWorkOrdersModal({ isOpen, onClose, onAdd, alreadyAdded, onViewWO }: 
 // ============================================================
 // MAIN: ROUTE DETAIL PAGE
 // ============================================================
-export default function RouteDetailPage() {
+export default function RouteViewPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const isNew = !id;
@@ -334,24 +334,11 @@ export default function RouteDetailPage() {
     const cardBg = isStart ? '#2FA30110' : 'white';
 
     return (
-      <div
-        key={`${stop.role}-${stop.location}-${idx}`}
-        onDragEnter={(e) => handleDragEnter(e, stopKey)}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
+      <div key={`${stop.role}-${stop.location}-${idx}`}>
         {/* Card */}
         <div
-          draggable={!isStart}
-          onDragStart={(e) => handleDragStart(e, stopKey)}
-          onDragEnd={handleDragEnd}
-          className="rounded-[10px] border overflow-hidden transition-all duration-150"
-          style={{
-            backgroundColor: cardBg,
-            borderColor: isDragging ? rc.seq : '#e0e0e0',
-            boxShadow: isDragging ? `0 0 0 2px ${rc.seq}40` : undefined,
-            opacity: isDragging ? 0.7 : 1,
-          }}
+          className="rounded-[10px] border border-[#e0e0e0] overflow-hidden transition-all duration-150"
+          style={{ backgroundColor: cardBg }}
         >
           <div className="flex">
             {/* ── LEFT: seq + controls ── */}
@@ -363,27 +350,7 @@ export default function RouteDetailPage() {
               >
                 {stop.seq}
               </div>
-              {!isStart && (
-                <>
-                  <button
-                    onClick={() => handleMoveStop(idx, -1)}
-                    disabled={!canMoveUp}
-                    className="w-[22px] h-[18px] flex items-center justify-center rounded hover:bg-black/5 disabled:opacity-20 disabled:cursor-not-allowed transition-colors cursor-pointer"
-                    title="Move up"
-                  >
-                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 8l4-4 4 4" stroke="#5e6578" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  </button>
-                  <button
-                    onClick={() => handleMoveStop(idx, 1)}
-                    disabled={!canMoveDown}
-                    className="w-[22px] h-[18px] flex items-center justify-center rounded hover:bg-black/5 disabled:opacity-20 disabled:cursor-not-allowed transition-colors cursor-pointer"
-                    title="Move down"
-                  >
-                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#5e6578" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  </button>
-                  <DragHandle />
-                </>
-              )}
+
             </div>
 
             {/* ── RIGHT: content ── */}
@@ -416,9 +383,6 @@ export default function RouteDetailPage() {
                           title="View details"
                         >
                           {wo.id}
-                        </button>
-                        <button onClick={() => handleRemoveWO(wo.id)} className="cursor-pointer text-[#787e90] hover:text-[#E53E3E] p-[2px] transition-colors" title="Remove">
-                          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>
                         </button>
                       </div>
                     </div>
@@ -454,15 +418,12 @@ export default function RouteDetailPage() {
             {/* Title + Status Badge */}
             <div className="flex items-start justify-between mb-5">
               <div className="flex items-center gap-3">
-                <h1 className="text-[24px] font-bold text-[#2b3b63] leading-tight">{isNew ? 'Create New Route' : `Edit Route ${routeId}`}</h1>
+                <h1 className="text-[24px] font-bold text-[#2b3b63] leading-tight">{isNew ? 'Create New Route' : `Route ${routeId}`}</h1>
                 <StatusBadge status={formStatus} />
               </div>
               <div className="flex items-center gap-3">
-                {isNew && formStatus === 'Draft' && (
-                  <Btn variant="outline" onClick={() => navigate('/transportation/routes')}>Save Draft</Btn>
-                )}
-                <Btn variant="primary" onClick={() => navigate('/transportation/routes')}>
-                  {isNew ? 'Create Route' : 'Save Changes'}
+                <Btn variant="primary" onClick={() => navigate(`/transportation/routes/${routeId}/edit`)}>
+                  Edit Route
                 </Btn>
               </div>
             </div>
@@ -484,37 +445,30 @@ export default function RouteDetailPage() {
                   </div>
                   <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
                     <span className="text-[#787e90] text-[13px]">Status</span>
-                    <select value={formStatus} onChange={e => setFormStatus(e.target.value)} className="text-[14px] font-bold text-[#2b3b63] bg-transparent border-none outline-none cursor-pointer">
-                      <option value="Draft">Draft</option>
-                      <option value="Scheduled">Scheduled</option>
-                      <option value="En Route">En Route</option>
-                      <option value="Completed">Completed</option>
-                    </select>
+                    <span className="text-[14px] font-bold text-[#2b3b63]">{formStatus}</span>
                   </div>
                 </div>
               </div>
               {/* Form fields */}
               <div className="p-[24px]">
-              <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                <div><FormLabel required>Owner Entity</FormLabel><Select value={formOwner} onChange={e => setFormOwner(e.target.value)}>{OWNER_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}</Select></div>
-                <div><FormLabel required>Assignee</FormLabel><Select value={formAssignee} onChange={e => setFormAssignee(e.target.value)}><option value="">Select driver...</option>{ASSIGNEE_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}</Select></div>
-                <div><FormLabel>Support Phone Number</FormLabel><Input type="text" value={formPhone} onChange={e => setFormPhone(e.target.value)} placeholder="(540) 555-0110" /></div>
-                <div><FormLabel>Scheduled Date &amp; Time</FormLabel><Input type="datetime-local" value={formDate} onChange={e => setFormDate(e.target.value)} /></div>
-                <div><FormLabel>Start Address</FormLabel><Input type="text" value={formStartAddr} onChange={e => { setFormStartAddr(e.target.value); if (backToStart) setFormEndAddr(e.target.value); }} /></div>
-                <div>
-                  <FormLabel>End Address</FormLabel>
-                  <Input type="text" value={backToStart ? formStartAddr : formEndAddr} onChange={e => setFormEndAddr(e.target.value)} disabled={backToStart} />
-                  <div className="mt-2"><Checkbox checked={backToStart} onChange={handleBackToStartChange} label="Back to Start Address" /></div>
+                <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                  <div><FormLabel>Owner Entity</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formOwner}</p></div>
+                  <div><FormLabel>Assignee</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formAssignee || 'Unassigned'}</p></div>
+                  <div><FormLabel>Support Phone Number</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formPhone || '—'}</p></div>
+                  <div><FormLabel>Scheduled Date &amp; Time</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formDate}</p></div>
+                  <div><FormLabel>Start Address</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formStartAddr}</p></div>
+                  <div>
+                    <FormLabel>End Address</FormLabel>
+                    <p className="text-[#2b3b63] font-medium mt-1">{backToStart ? formStartAddr : formEndAddr}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-4"><FormLabel>Route Note</FormLabel><Textarea value={formNote} onChange={e => setFormNote(e.target.value)} placeholder="Optional notes visible to dispatcher..." style={{ height: 80 }} /></div>
+                <div className="mt-4"><FormLabel>Route Note</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formNote || '—'}</p></div>
               </div>
             </div>
 
             {/* Stops header */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-[16px] font-bold text-[#2b3b63]">Stops</h3>
-              <Btn variant="primary" icon={Icons.Add} onClick={() => setShowAddWOModal(true)}>Add Work Orders</Btn>
             </div>
 
             <div className="grid grid-cols-[1fr_1fr] gap-6">

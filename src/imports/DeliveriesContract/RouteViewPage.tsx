@@ -409,15 +409,12 @@ export default function RouteViewPage() {
         <div className="bg-white rounded-[12px] px-8 py-6">
           <div className="max-w-[1248px] mx-auto">
 
-            {/* Back */}
-            <button onClick={() => navigate('/transportation/routes')} className="flex items-center gap-1 text-[#5e6578] hover:text-[#2b3b63] cursor-pointer font-sans text-[14px] font-medium mb-5 transition-colors">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              Back
-            </button>
-
             {/* Title + Status Badge */}
             <div className="flex items-start justify-between mb-5">
               <div className="flex items-center gap-3">
+                <button onClick={() => navigate('/transportation/routes')} className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 text-[#5e6578] hover:text-[#2b3b63] cursor-pointer transition-colors" title="Back">
+                  <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
                 <h1 className="text-[24px] font-bold text-[#2b3b63] leading-tight">{isNew ? 'Create New Route' : `Route ${routeId}`}</h1>
                 <StatusBadge status={formStatus} />
               </div>

@@ -5,6 +5,7 @@ import WorkOrdersContainer from './WorkOrdersContainer';
 import CalendarView from './CalendarView';
 import RouteDetailPage from './RouteDetailPage';
 import RouteViewPage from './RouteViewPage';
+import WODetailPage from './WODetailPage';
 import { TransportationProvider } from './TransportationContext';
 import svgPaths from "./svg-er6yqlh6e7";
 import imgThumbnail from "./71d7f36a3fe4c842bd190a79c3b92a977e1a20e0.png";
@@ -2592,7 +2593,7 @@ export default function DeliveriesContract({ defaultTab = 'Contracts' }: { defau
           <Frame13 activeTab={activeTab} />
         </div>
         <div className="flex-1 w-full flex flex-col items-center">
-          {activeTab === 'Calendar' ? <CalendarView /> : activeTab === 'RouteDetail' ? <RouteDetailPage /> : activeTab === 'RouteView' ? <RouteViewPage /> : activeTab === 'Contracts' ? <WorkOrdersContainer /> : <RoutesContainer />}
+          {activeTab === 'Calendar' ? <CalendarView /> : activeTab === 'RouteDetail' ? <RouteDetailPage /> : activeTab === 'RouteView' ? <RouteViewPage /> : activeTab === 'WODetail' ? <WODetailPage /> : activeTab === 'Contracts' ? <WorkOrdersContainer /> : <RoutesContainer />}
         </div>
       </div>
     </TransportationProvider>

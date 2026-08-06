@@ -347,20 +347,11 @@ type WOType = 'Delivery' | 'Return' | 'Move';
 type WOStatus = 'Open' | 'Scheduled' | 'En Route' | 'Completed' | 'Delayed' | 'Draft'; 
 
 export default function WorkOrdersContainer() {
-  const { workOrders, addWorkOrder, updateWorkOrder, deleteWorkOrder } = useTransportation();
+  const navigate = useNavigate();
+  const { workOrders, deleteWorkOrder } = useTransportation();
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('All');
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [editingWO, setEditingWO] = useState<WorkOrder | null>(null);
   
-  // Custom form validation
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-  const formRef = useRef<HTMLFormElement>(null);
-
-  // Modals state
-  const [isLinkContractOpen, setLinkContractOpen] = useState(false);
-  const [isLinkInventoryOpen, setLinkInventoryOpen] = useState(false);
   const [deletingWOId, setDeletingWOId] = useState<string | null>(null);
-  const [formWOType, setFormWOType] = useState<WOType>('Delivery');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
@@ -383,73 +374,8 @@ export default function WorkOrdersContainer() {
 
   const confirmDelete = (id: string) => setDeletingWOId(id);
   const handleDelete = () => { if (deletingWOId) { deleteWorkOrder(deletingWOId); setDeletingWOId(null); } };
-  const handleEdit = (wo: WorkOrder) => {
-    setEditingWO(wo);
-    setFormWOType(wo.type);
-    setFormErrors({});
-    setIsCreateModalOpen(true);
-  };
-
-  const handleCreate = () => {
-    setEditingWO(null);
-    setFormWOType('Delivery');
-    setFormErrors({});
-    setIsCreateModalOpen(true);
-  };
-  const closeModal = () => { setIsCreateModalOpen(false); setEditingWO(null); };
-
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
-    const fd = new FormData(formRef.current!);
-    const data = Object.fromEntries(fd.entries());
-    const type = data.type as WOType;
-    const isMove = isMoveType(type);
-
-    const errors: Record<string, string> = {};
-    if (!data.customerName) errors.customerName = 'This field is required';
-    if (!data.buildingType) errors.buildingType = 'This field is required';
-    if (!data.buildingSize) errors.buildingSize = 'This field is required';
-    if (isMove) {
-      if (!data.pickupAddress) errors.pickupAddress = 'This field is required';
-      if (!data.dropoffAddress) errors.dropoffAddress = 'This field is required';
-    } else {
-      if (!data.visitAddress) errors.visitAddress = 'This field is required';
-    }
-
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      return;
-    }
-    setFormErrors({});
-
-    const woData = {
-      type,
-      customer: data.customerName as string,
-      phone: (data.customerPhone as string) || '',
-      buildingType: data.buildingType as string,
-      buildingSize: (data.buildingSize as string) || '',
-      serial: (data.serialNumber as string) || '',
-      pickup: (data.pickupAddress as string) || '',
-      dropoff: (data.dropoffAddress as string) || '',
-      visit: (data.visitAddress as string) || '',
-      amountDue: Number(data.amountDue) || 0,
-      note: (data.note as string) || '',
-    };
-
-    if (editingWO) {
-      updateWorkOrder({ ...editingWO, ...woData });
-    } else {
-      addWorkOrder({
-        id: 'WO-' + String(1000 + workOrders.length + 1),
-        status: 'Open' as WOStatus,
-        route: '',
-        assignee: '',
-        contract: '',
-        ...woData,
-      });
-    }
-    closeModal();
-  };
+  const handleEdit = (wo: WorkOrder) => navigate(`/transportation/workorders/${wo.id}/edit`);
+  const handleCreate = () => navigate('/transportation/workorders/create');
 
   const woFilterTabs: FilterTab[] = [
     { label: 'All', value: 'All', count: counts.All },
@@ -482,159 +408,13 @@ export default function WorkOrdersContainer() {
               <WOTableItem
                 key={wo.id}
                 wo={wo}
-                onEdit={() => handleEdit(wo)}
+                onEdit={() => navigate(`/transportation/workorders/${wo.id}/edit`)}
                 onDelete={() => confirmDelete(wo.id)}
               />
             ))
           )}
         </div>
       </div>
-
-      {/* Create/Edit Modal */}
-      {isCreateModalOpen && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center" onClick={closeModal}>
-          <div className="relative bg-white rounded-[10px] w-full max-w-[600px] max-h-[85vh] shadow-xl mx-4 flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
-            {/* Header */}
-            <div className="flex items-center justify-between px-[24px] py-[20px] border-b border-[#e0e0e0] shrink-0">
-              <h3 className="font-sans font-bold text-[#2b3b63] text-[20px] leading-[normal]">
-                {editingWO ? 'Edit Work Order' : 'New Work Order'}
-              </h3>
-              <button onClick={closeModal} className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] hover:bg-[#f0f0f0] transition-colors cursor-pointer text-[#5e6578]">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              </button>
-            </div>
-            {/* Scrollable Form Body */}
-            <style>{`.wo-modal-body::-webkit-scrollbar { display: none; }`}</style>
-            <div className="flex-1 overflow-y-auto wo-modal-body" style={{ scrollbarWidth: 'none' }}>
-            <form onSubmit={handleSave} className="px-[24px] py-[20px] space-y-[16px]" id="wo-form" ref={formRef}>
-              {/* Type */}
-              <div>
-                <FormLabel>Type</FormLabel>
-                <Select name="type" value={formWOType} onChange={(e) => setFormWOType(e.target.value as WOType)}>
-                  {WO_TYPE_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                </Select>
-              </div>
-
-              {/* Customer Name + Phone */}
-              <div className="grid grid-cols-2 gap-[12px]">
-                <div>
-                  <FormLabel>Customer Name</FormLabel>
-                  <Input type="text" name="customerName" defaultValue={editingWO?.customer} placeholder="John Doe" className={formErrors.customerName ? 'border-[#E53E3E]' : ''} />
-                  {formErrors.customerName && <p className="text-[#E53E3E] text-[12px] mt-1">{formErrors.customerName}</p>}
-                </div>
-                <div>
-                  <FormLabel>Phone</FormLabel>
-                  <Input type="text" name="customerPhone" defaultValue={editingWO?.phone} placeholder="(540) 555-0110" />
-                </div>
-              </div>
-
-              {/* Contract */}
-              <div>
-                <FormLabel>Contract</FormLabel>
-                <div className="flex gap-[8px]">
-                  <Input type="text" name="contract" defaultValue={editingWO?.contract || ''} placeholder="No contract linked" className="flex-1" />
-                  <Btn type="button" variant="secondary" onClick={() => setLinkContractOpen(true)} className="gap-[6px] shrink-0 px-[12px]">
-                    <Icons.Contract width={16} height={16} />
-                    Link Contract
-                  </Btn>
-                </div>
-              </div>
-
-              {/* Building Type + Size */}
-              <div className="grid grid-cols-2 gap-[12px]">
-                <div>
-                  <FormLabel>Building Type</FormLabel>
-                  <Input type="text" name="buildingType" defaultValue={editingWO?.buildingType} placeholder="Utility Shed" className={formErrors.buildingType ? 'border-[#E53E3E]' : ''} />
-                  {formErrors.buildingType && <p className="text-[#E53E3E] text-[12px] mt-1">{formErrors.buildingType}</p>}
-                </div>
-                <div>
-                  <FormLabel>Building Size</FormLabel>
-                  <Input type="text" name="buildingSize" defaultValue={editingWO?.buildingSize} placeholder="10x12" className={formErrors.buildingSize ? 'border-[#E53E3E]' : ''} />
-                  {formErrors.buildingSize && <p className="text-[#E53E3E] text-[12px] mt-1">{formErrors.buildingSize}</p>}
-                </div>
-              </div>
-
-              {/* Serial Number */}
-              <div>
-                <FormLabel>Serial Number (optional)</FormLabel>
-                <div className="flex gap-[8px]">
-                  <Input type="text" name="serialNumber" defaultValue={editingWO?.serial} placeholder="SN-000000" className="flex-1" />
-                  <Btn type="button" variant="secondary" onClick={() => setLinkInventoryOpen(true)} className="gap-[6px] shrink-0 px-[12px]">
-                    <Icons.Inventory width={16} height={16} />
-                    Link Inventory
-                  </Btn>
-                </div>
-              </div>
-
-              {/* Addresses */}
-              {isMoveType(formWOType) ? (
-                <div className="grid grid-cols-2 gap-[12px]">
-                  <div>
-                    <div className="flex items-center gap-[6px] mb-[6px]">
-                      <div className="w-[6px] h-[6px] rounded-full bg-[#2B3B63] shrink-0" />
-                      <span className="font-sans font-bold text-[#2B3B63] text-[14px] leading-[normal] uppercase">PICKUP</span>
-                    </div>
-                    <Input type="text" name="pickupAddress" defaultValue={editingWO?.pickup} placeholder="Street, City, State ZIP" className={formErrors.pickupAddress ? 'border-[#E53E3E]' : ''} />
-                    {formErrors.pickupAddress && <p className="text-[#E53E3E] text-[12px] mt-1">{formErrors.pickupAddress}</p>}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-[6px] mb-[6px]">
-                      <div className="w-[6px] h-[6px] rounded-full bg-[#ff7048] shrink-0" />
-                      <span className="font-sans font-bold text-[#ff7048] text-[14px] leading-[normal] uppercase">DROPOFF</span>
-                    </div>
-                    <Input type="text" name="dropoffAddress" defaultValue={editingWO?.dropoff} placeholder="Street, City, State ZIP" className={formErrors.dropoffAddress ? 'border-[#E53E3E]' : ''} />
-                    {formErrors.dropoffAddress && <p className="text-[#E53E3E] text-[12px] mt-1">{formErrors.dropoffAddress}</p>}
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <div className="flex items-center gap-[6px] mb-[6px]">
-                    <div className="w-[6px] h-[6px] rounded-full bg-[#16a34a] shrink-0" />
-                    <span className="font-sans font-bold text-[#16a34a] text-[14px] leading-[normal] uppercase">VISIT ADDRESS</span>
-                  </div>
-                  <Input type="text" name="visitAddress" defaultValue={editingWO?.visit} placeholder="Street, City, State ZIP" className={formErrors.visitAddress ? 'border-[#E53E3E]' : ''} />
-                  {formErrors.visitAddress && <p className="text-[#E53E3E] text-[12px] mt-1">{formErrors.visitAddress}</p>}
-                </div>
-              )}
-
-              {/* Amount Due */}
-              <div>
-                <FormLabel>Amount Due</FormLabel>
-                <div className="relative">
-                  <span className="absolute left-[12px] top-[10px] font-sans text-[14px] text-[#A0A4B0]">$</span>
-                  <Input type="number" name="amountDue" defaultValue={editingWO?.amountDue} placeholder="0.00" className="pl-[24px]" />
-                </div>
-              </div>
-
-              {/* Note */}
-              <div>
-                <FormLabel>Detail / Note (optional)</FormLabel>
-                <Textarea rows={3} name="note" defaultValue={editingWO?.note} placeholder="Add any special instructions..." />
-              </div>
-
-              {/* Attachments */}
-              <div>
-                <FormLabel>Attachments</FormLabel>
-                <div className="bg-white border border-dashed border-[#D8DADF] rounded-[6px] h-[40px] px-[12px] flex items-center gap-[8px] cursor-pointer hover:bg-[#F5F5F7] transition-colors w-full">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14 10.6667v2.6666C14 14.07 13.403 14.6667 12.6667 14.6667H3.33333C2.597 14.6667 2 14.07 2 13.3333v-2.6666M11.3333 5.33333L8 2m0 0L4.66667 5.33333M8 2v8.66667" stroke="#5E6578" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span className="font-sans font-normal text-[#5E6578] text-[14px]">Upload photos, PDFs, or documents</span>
-                </div>
-              </div>
-            </form>
-            </div>
-
-            {/* Footer */}
-            <div className="flex justify-end gap-[8px] px-[24px] py-[16px] border-t border-[#e0e0e0] shrink-0">
-              <Btn variant="outline" onClick={closeModal}>Cancel</Btn>
-              <Btn variant="primary" type="submit" form="wo-form">
-                {editingWO ? 'Save Changes' : 'Create Work Order'}
-              </Btn>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Delete Confirmation Modal */}
       {deletingWOId && (
@@ -652,30 +432,6 @@ export default function WorkOrdersContainer() {
         </div>
       )}
 
-      <LinkContractModal
-        isOpen={isLinkContractOpen}
-        onClose={() => setLinkContractOpen(false)}
-        onLink={(c) => {
-          if (formRef.current) {
-            (formRef.current.elements.namedItem('contract') as HTMLInputElement).value = c.id;
-            (formRef.current.elements.namedItem('customerName') as HTMLInputElement).value = c.customer;
-            (formRef.current.elements.namedItem('customerPhone') as HTMLInputElement).value = c.phone;
-            (formRef.current.elements.namedItem('amountDue') as HTMLInputElement).value = c.balance.toString();
-          }
-        }}
-      />
-
-      <LinkInventoryModal
-        isOpen={isLinkInventoryOpen}
-        onClose={() => setLinkInventoryOpen(false)}
-        onLink={(i) => {
-          if (formRef.current) {
-            (formRef.current.elements.namedItem('buildingType') as HTMLInputElement).value = i.type;
-            (formRef.current.elements.namedItem('buildingSize') as HTMLInputElement).value = i.size;
-            (formRef.current.elements.namedItem('serialNumber') as HTMLInputElement).value = i.id;
-          }
-        }}
-      />
     </div>
   );
 }

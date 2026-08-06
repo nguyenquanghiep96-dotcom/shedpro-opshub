@@ -420,46 +420,36 @@ export default function RouteViewPage() {
               </div>
               <div className="flex items-center gap-3">
                 <Btn variant="primary" onClick={() => navigate(`/transportation/routes/${routeId}/edit`)}>
-                  Edit Route
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="mr-2"><path d="M7 2.333h3.5c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C13.7 3.853 13.7 4.413 13.7 5.533v3.934c0 1.12 0 1.68-.218 2.108a2 2 0 01-.874.874c-.428.218-.988.218-2.108.218H3.5c-1.12 0-1.68 0-2.108-.218a2 2 0 01-.874-.874C.3 11.147.3 10.587.3 9.467V5.533c0-1.12 0-1.68.218-2.108a2 2 0 01.874-.874C1.82 2.333 2.38 2.333 3.5 2.333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M10.85 1.5l1.65 1.65-8.25 8.25H2.6v-1.65l8.25-8.25z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  Edit
                 </Btn>
               </div>
             </div>
 
             {/* Route Information */}
-            <h3 className="text-[16px] font-bold text-[#2b3b63] mb-3">Route Information</h3>
             <div className="border border-[#d8dadf] rounded-[6px] mb-6">
-              {/* Stats row */}
-              <div className="flex items-center justify-between flex-wrap px-[24px] py-[16px] border-b border-[#e8eaed]">
-                <span className="text-[#2b3b63] text-[18px] font-bold">{routeId}</span>
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Stops</span>
-                    <span className="text-[#FF7048] text-[14px] font-bold">{stops.length}</span>
-                  </div>
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Total Distance</span>
-                    <span className="text-[#FF7048] text-[14px] font-bold">{totalDistance}</span>
-                  </div>
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Status</span>
-                    <span className="text-[14px] font-bold text-[#2b3b63]">{formStatus}</span>
-                  </div>
-                </div>
+              <div className="px-[24px] py-[16px] border-b border-[#e8eaed]">
+                <span className="text-[#2b3b63] text-[16px] font-bold">Details</span>
               </div>
+              
               {/* Form fields */}
               <div className="p-[24px]">
                 <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                  <div><FormLabel>Owner Entity</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formOwner}</p></div>
-                  <div><FormLabel>Assignee</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formAssignee || 'Unassigned'}</p></div>
-                  <div><FormLabel>Support Phone Number</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formPhone || '—'}</p></div>
-                  <div><FormLabel>Scheduled Date &amp; Time</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formDate}</p></div>
-                  <div><FormLabel>Start Address</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formStartAddr}</p></div>
-                  <div>
-                    <FormLabel>End Address</FormLabel>
-                    <p className="text-[#2b3b63] font-medium mt-1">{backToStart ? formStartAddr : formEndAddr}</p>
-                  </div>
+                  <div className="flex items-center"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Status</span><StatusBadge status={formStatus} /></div>
+                  <div className="flex items-center"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Driver</span><p className="text-[#2b3b63] font-medium text-[14px]">{formAssignee || 'Unassigned'}</p></div>
+                  
+                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Scheduled</span><p className="text-[#2b3b63] font-medium text-[14px]">{formDate}</p></div>
+                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Clients</span><p className="text-[#2b3b63] font-medium text-[14px]">Appalachian Storage <span className="text-[#787e90]">(Manufacturer)</span></p></div>
+                  
+                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Planned Distance</span><p className="text-[#2b3b63] font-medium text-[14px]">{totalDistance}</p></div>
+                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Start</span><p className="text-[#2b3b63] font-medium text-[14px]">{formStartAddr}</p></div>
+                  
+                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">End</span><p className="text-[#2b3b63] font-medium text-[14px]">{backToStart ? formStartAddr : formEndAddr}</p></div>
                 </div>
-                <div className="mt-4"><FormLabel>Route Note</FormLabel><p className="text-[#2b3b63] font-medium mt-1">{formNote || '—'}</p></div>
+                <div className="mt-6">
+                  <span className="block font-sans font-medium text-[#787e90] text-[12px] uppercase mb-1">Note</span>
+                  <p className="text-[#2b3b63] font-medium text-[14px] whitespace-pre-wrap">{formNote || '—'}</p>
+                </div>
               </div>
             </div>
 

@@ -96,7 +96,7 @@ export default function WODetailPage() {
                 </div>
 
                 {/* PICKUP & DROP OFF Section */}
-                <h4 className="text-[14px] font-bold text-[#787e90] mt-8 mb-3 uppercase tracking-wide">PICKUP & DROP OFF</h4>
+                <h4 className="text-[14px] font-bold text-[#2b3b63] mt-8 mb-3 uppercase tracking-wide">PICKUP & DROP OFF</h4>
                 <div className="border-t border-[#f0f0f0] pt-4 mb-2"></div>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-4">
                   <div>
@@ -110,7 +110,7 @@ export default function WODetailPage() {
                 </div>
 
                 {/* DETAILS Section */}
-                <h4 className="text-[14px] font-bold text-[#787e90] mt-8 mb-3 uppercase tracking-wide">DETAILS</h4>
+                <h4 className="text-[14px] font-bold text-[#2b3b63] mt-8 mb-3 uppercase tracking-wide">DETAILS</h4>
                 <div className="border-t border-[#f0f0f0] pt-4 mb-2"></div>
                 <div className="flex flex-col gap-4">
                   <div className="w-1/2 pr-3">

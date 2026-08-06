@@ -8,7 +8,8 @@ import {
   WO_TYPE_OPTIONS,
   ASSIGNEE_OPTIONS,
   isMoveType,
-  resolveAddress
+  resolveAddress,
+  RouteData
 } from './transportationData';
 import { useTransportation } from './TransportationContext';
 import svgPaths from "./svg-er6yqlh6e7";
@@ -138,9 +139,11 @@ const WO_COLUMNS = [
   { label: 'Customer',  flex: 'flex-[1_0_0]' },
   { label: 'Building',  flex: 'flex-[1.5_0_0]' },
   { label: 'Stops',     flex: 'flex-[2.5_0_0]' },
-  { label: 'Status',    flex: 'flex-[1_0_0]' },
-  { label: 'Route',     flex: 'flex-[0.8_0_0]' },
-  { label: 'Assignee',  flex: 'flex-[1_0_0]' },
+  { label: 'Route',     flex: 'flex-[1_0_0]' },
+  { label: 'Driver',    flex: 'flex-[1_0_0]' },
+  { label: 'Scheduled', flex: 'flex-[1_0_0]' },
+  { label: 'Completed', flex: 'flex-[1_0_0]' },
+  { label: 'Status',    flex: 'flex-[0.8_0_0]' },
 ];
 
 function WOTableHeader() {
@@ -165,7 +168,7 @@ function WOTableHeader() {
 
 /* ─── Table Row ─────────────────────────────────────────────── */
 
-function WOTableItem({ wo, onEdit, onDelete }: { wo: WorkOrder; onEdit: () => void; onDelete: () => void }) {
+function WOTableItem({ wo, parentRoute, onView, onEdit, onDelete }: { wo: WorkOrder; parentRoute?: RouteData; onView: () => void; onEdit: () => void; onDelete: () => void }) {
   // Build stops text from pickup/dropoff/visit addresses
   const stops: string[] = [];
   if (wo.pickup) stops.push(wo.pickup);
@@ -254,31 +257,54 @@ function WOTableItem({ wo, onEdit, onDelete }: { wo: WorkOrder; onEdit: () => vo
         </div>
       </div>
 
-      {/* Status */}
+      {/* Route */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex items-center px-[10px] py-[12px] relative size-full">
-          <StatusBadge status={wo.status} />
-        </div>
-      </div>
-
-      {/* Route — bold orange */}
-      <div className="flex flex-[0.8_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
+        <div className="content-stretch flex flex-col gap-[6px] items-start justify-center px-[10px] py-[12px] relative size-full">
           <p className={`font-sans text-[14px] leading-[normal] ${wo.route ? 'font-semibold text-[#ff7048]' : 'font-normal text-[#5e6578]'}`}>{wo.route || '\u2014'}</p>
+          {parentRoute && <StatusBadge status={parentRoute.status} />}
         </div>
       </div>
 
-      {/* Assignee */}
+      {/* Driver */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
-          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{wo.assignee || '\u2014'}</p>
+          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{parentRoute?.assignee || '\u2014'}</p>
+        </div>
+      </div>
+
+      {/* Scheduled */}
+      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
+          <p className="font-sans font-normal text-[#5e6578] text-[13px] leading-[normal]">{parentRoute?.scheduledDate || '\u2014'}</p>
+        </div>
+      </div>
+
+      {/* Completed */}
+      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
+          <p className="font-sans font-normal text-[#5e6578] text-[13px] leading-[normal]">{wo.status === 'Completed' ? 'Sep 6 2026, 4:00 PM' : '\u2014'}</p>
+        </div>
+      </div>
+
+      {/* Status */}
+      <div className="flex flex-[0.8_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex items-center px-[10px] py-[12px] relative size-full">
+           <StatusBadge status={wo.status} />
         </div>
       </div>
 
       {/* Actions */}
       <div className="content-stretch flex gap-[4px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[80px]">
-        <div onClick={onEdit} className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors"><svg className="shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.333 2a2.121 2.121 0 0 1 3 3L5.667 13.667l-4 1 1-4L11.333 2z" stroke="#2B3B63" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg></div>
-        <div onClick={onDelete} className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors"><svg className="shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M5.333 4V2.667A1.333 1.333 0 0 1 6.667 1.333h2.666A1.333 1.333 0 0 1 10.667 2.667V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z" stroke="#2B3B63" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg></div>
+        <div className="relative group">
+          <div className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </div>
+          <div className="absolute right-0 top-full mt-1 bg-white border border-[#e0e0e0] rounded-[6px] shadow-lg hidden group-hover:flex flex-col w-[120px] z-[100] py-1">
+            <button onClick={onView} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">View</button>
+            <button onClick={onEdit} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">Edit</button>
+            <button onClick={onDelete} className="px-4 py-2 text-left text-[14px] text-[#ef4444] hover:bg-[#F9FAFB] w-full cursor-pointer border-t border-[#f0f0f0]">Delete</button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -348,7 +374,7 @@ type WOStatus = 'Open' | 'Scheduled' | 'En Route' | 'Completed' | 'Delayed' | 'D
 
 export default function WorkOrdersContainer() {
   const navigate = useNavigate();
-  const { workOrders, deleteWorkOrder } = useTransportation();
+  const { workOrders, routes, deleteWorkOrder } = useTransportation();
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('All');
   
   const [deletingWOId, setDeletingWOId] = useState<string | null>(null);
@@ -408,6 +434,8 @@ export default function WorkOrdersContainer() {
               <WOTableItem
                 key={wo.id}
                 wo={wo}
+                parentRoute={routes.find(r => r.id === wo.route)}
+                onView={() => navigate(`/transportation/workorders/${wo.id}`)}
                 onEdit={() => navigate(`/transportation/workorders/${wo.id}/edit`)}
                 onDelete={() => confirmDelete(wo.id)}
               />

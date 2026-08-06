@@ -7,6 +7,7 @@ export default function App() {
     <BrowserRouter>
       <ErrorBoundary>
         <Routes>
+          <Route path="/transportation/workorders/:id" element={<DeliveriesContract defaultTab="WOView" />} />
           <Route path="/transportation/workorders" element={<DeliveriesContract defaultTab="Contracts" />} />
           <Route path="/transportation/workorders/create" element={<DeliveriesContract defaultTab="WODetail" />} />
           <Route path="/transportation/workorders/:id/edit" element={<DeliveriesContract defaultTab="WODetail" />} />

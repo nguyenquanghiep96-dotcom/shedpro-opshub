@@ -96,6 +96,47 @@ function DragHandle() {
 
 
 // ============================================================
+// CLIENT MULTI-SELECT
+// ============================================================
+function ClientMultiSelect() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="relative">
+      <div 
+        className="flex items-center border border-[#d8dadf] rounded-[6px] px-3 py-2 min-h-[42px] cursor-pointer bg-white hover:border-[#b0b3b8] transition-colors"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="flex flex-wrap gap-2 flex-1">
+          <div className="flex items-center gap-2 bg-[#f0f2f5] px-2 py-1 rounded-[4px] border border-[#e0e0e0]">
+            <span className="text-[13px] text-[#2b3b63]">Appalachian Storage <span className="text-[#787e90]">(Manufacturer)</span></span>
+            <span className="text-[#787e90] hover:text-[#2b3b63] cursor-pointer font-bold text-[14px] leading-none ml-1">×</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 shrink-0 ml-2">
+          <span className="text-[#a0a4b0] hover:text-[#5e6578] font-bold cursor-pointer text-[16px] leading-none">×</span>
+          <span className="text-[#d8dadf]">|</span>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="#787E90" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </div>
+      </div>
+      {isOpen && (
+        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#d8dadf] rounded-[6px] shadow-lg z-10 max-h-[250px] overflow-y-auto py-2">
+          <div className="px-4 py-2 text-[11px] font-bold text-[#a0a4b0] uppercase tracking-wider">Manufacturers</div>
+          {[
+            'Another Test', 'Beachy Barn, LTD - Tara Test (MFR)', 'Better Built Buildings',
+            'Capybara MFR', 'Carefree Rentals', 'Cherokee Structures LLC', 'Coastal Shed Company'
+          ].map((client, i) => (
+            <div key={client} className={`flex items-center justify-between px-4 py-[10px] hover:bg-[#F9FAFB] cursor-pointer ${i === 0 ? 'bg-[#eef4ff]' : ''}`}>
+              <span className="text-[14px] text-[#2b3b63]">{client}</span>
+              <span className="bg-[#eef4ff] text-[#3B82F6] text-[10px] font-bold px-[6px] py-[2px] rounded-[4px]">MANUFACTURER</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
 // WO VIEW-ONLY POPUP
 // ============================================================
 function WODetailPopup({ wo, onClose }: { wo: WorkOrder; onClose: () => void }) {
@@ -466,23 +507,13 @@ export default function RouteDetailPage() {
             </div>
 
             {/* Route Information */}
-            <h3 className="text-[16px] font-bold text-[#2b3b63] mb-3">Route Information</h3>
             <div className="border border-[#d8dadf] rounded-[6px] mb-6">
               {/* Stats row */}
               <div className="flex items-center justify-between flex-wrap px-[24px] py-[16px] border-b border-[#e8eaed]">
-                <span className="text-[#2b3b63] text-[18px] font-bold">{routeId}</span>
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Stops</span>
-                    <span className="text-[#FF7048] text-[14px] font-bold">{stops.length}</span>
-                  </div>
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Total Distance</span>
-                    <span className="text-[#FF7048] text-[14px] font-bold">{totalDistance}</span>
-                  </div>
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[6px]">
-                    <span className="text-[#787e90] text-[13px]">Status</span>
-                    <select value={formStatus} onChange={e => setFormStatus(e.target.value)} className="text-[14px] font-bold text-[#2b3b63] bg-transparent border-none outline-none cursor-pointer">
+                  <span className="text-[#2b3b63] text-[16px] font-bold">Route Details</span>
+                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[4px] bg-white">
+                    <select value={formStatus} onChange={e => setFormStatus(e.target.value)} className="text-[13px] font-semibold text-[#2b3b63] bg-transparent border-none outline-none cursor-pointer pr-1">
                       <option value="Draft">Draft</option>
                       <option value="Scheduled">Scheduled</option>
                       <option value="En Route">En Route</option>
@@ -490,22 +521,37 @@ export default function RouteDetailPage() {
                     </select>
                   </div>
                 </div>
+                
+                <div className="flex items-center gap-6">
+                  <div className="flex flex-col items-start">
+                    <span className="text-[#a0a4b0] text-[10px] font-bold uppercase tracking-wider mb-1">Waypoints</span>
+                    <span className="text-[#2b3b63] text-[14px] font-bold">{stops.length}</span>
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-[#a0a4b0] text-[10px] font-bold uppercase tracking-wider mb-1">Distance</span>
+                    <span className="text-[#2b3b63] text-[14px] font-bold">{totalDistance}</span>
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="text-[#a0a4b0] text-[10px] font-bold uppercase tracking-wider mb-1">Duration</span>
+                    <span className="text-[#2b3b63] text-[14px] font-bold">—</span>
+                  </div>
+                </div>
               </div>
               {/* Form fields */}
               <div className="p-[24px]">
-              <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                <div><FormLabel required>Owner Entity</FormLabel><Select value={formOwner} onChange={e => setFormOwner(e.target.value)}>{OWNER_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}</Select></div>
-                <div><FormLabel required>Assignee</FormLabel><Select value={formAssignee} onChange={e => setFormAssignee(e.target.value)}><option value="">Select driver...</option>{ASSIGNEE_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}</Select></div>
-                <div><FormLabel>Support Phone Number</FormLabel><Input type="text" value={formPhone} onChange={e => setFormPhone(e.target.value)} placeholder="(540) 555-0110" /></div>
-                <div><FormLabel>Scheduled Date &amp; Time</FormLabel><Input type="datetime-local" value={formDate} onChange={e => setFormDate(e.target.value)} /></div>
-                <div><FormLabel>Start Address</FormLabel><Input type="text" value={formStartAddr} onChange={e => { setFormStartAddr(e.target.value); if (backToStart) setFormEndAddr(e.target.value); }} /></div>
-                <div>
-                  <FormLabel>End Address</FormLabel>
-                  <Input type="text" value={backToStart ? formStartAddr : formEndAddr} onChange={e => setFormEndAddr(e.target.value)} disabled={backToStart} />
-                  <div className="mt-2"><Checkbox checked={backToStart} onChange={handleBackToStartChange} label="Back to Start Address" /></div>
-                </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+                <div><FormLabel required>Clients</FormLabel><ClientMultiSelect /></div>
+                <div><FormLabel required>Assignee (Driver)</FormLabel><Select value={formAssignee} onChange={e => setFormAssignee(e.target.value)}><option value="">Select a driver...</option>{ASSIGNEE_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}</Select></div>
+                
+                <div><FormLabel required>Start Address</FormLabel><Input type="text" value={formStartAddr} onChange={e => { setFormStartAddr(e.target.value); if (backToStart) setFormEndAddr(e.target.value); }} placeholder="Start typing the start address..." /></div>
+                <div><FormLabel required>End Address</FormLabel><Input type="text" value={backToStart ? formStartAddr : formEndAddr} onChange={e => setFormEndAddr(e.target.value)} disabled={backToStart} placeholder="Start typing the end address..." /></div>
+                
+                <div className="col-span-2 -mt-2"><Checkbox checked={backToStart} onChange={handleBackToStartChange} label="Return to start address (round trip)" /></div>
+                
+                <div className="col-span-2"><FormLabel>Scheduled Date &amp; Time</FormLabel><Input type="datetime-local" value={formDate} onChange={e => setFormDate(e.target.value)} /></div>
+                
+                <div className="col-span-2"><FormLabel>Note</FormLabel><Textarea value={formNote} onChange={e => setFormNote(e.target.value)} placeholder="Optional notes" style={{ height: 80 }} /></div>
               </div>
-              <div className="mt-4"><FormLabel>Route Note</FormLabel><Textarea value={formNote} onChange={e => setFormNote(e.target.value)} placeholder="Optional notes visible to dispatcher..." style={{ height: 80 }} /></div>
               </div>
             </div>
 

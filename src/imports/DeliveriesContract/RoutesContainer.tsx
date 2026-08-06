@@ -154,12 +154,12 @@ function RoutesTableHeader() {
         </div>
         <ArrowDown />
       </div>
-      
-      {/* Route Name */}
+
+      {/* Status */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
           <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
-            <p className="leading-[normal]">Assignee</p>
+            <p className="leading-[normal]">Status</p>
           </div>
           <ArrowDown />
         </div>
@@ -169,12 +169,32 @@ function RoutesTableHeader() {
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
           <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
-            <p className="leading-[normal]">Work Orders</p>
+            <p className="leading-[normal]">Driver</p>
+          </div>
+          <ArrowDown />
+        </div>
+      </div>
+      
+      {/* Scheduled */}
+      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
+          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
+            <p className="leading-[normal]">Scheduled Date</p>
           </div>
           <ArrowDown />
         </div>
       </div>
 
+      {/* Waypoints */}
+      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
+          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
+            <p className="leading-[normal]">Waypoints</p>
+          </div>
+          <ArrowDown />
+        </div>
+      </div>
+      
       {/* Stops */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
@@ -184,42 +204,12 @@ function RoutesTableHeader() {
           <ArrowDown />
         </div>
       </div>
-      
-      {/* Stop Type */}
+
+      {/* Total Distance */}
       <div className="flex flex-[1.5_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
           <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
-            <p className="leading-[normal]">Distance</p>
-          </div>
-          <ArrowDown />
-        </div>
-      </div>
-
-      {/* Schedule */}
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
-          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
-            <p className="leading-[normal]">Scheduled Date</p>
-          </div>
-          <ArrowDown />
-        </div>
-      </div>
-      
-      {/* Owner */}
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
-          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
-            <p className="leading-[normal]">Dispatched</p>
-          </div>
-          <ArrowDown />
-        </div>
-      </div>
-      
-      {/* Status */}
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
-          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-sans font-bold justify-center leading-[0] min-w-px not-italic relative text-[#2b3b63] text-[14px]">
-            <p className="leading-[normal]">Status</p>
+            <p className="leading-[normal]">Total Distance</p>
           </div>
           <ArrowDown />
         </div>
@@ -263,23 +253,37 @@ function RoutesTableItem({ id, assignee, workOrders, stops, distance, scheduledD
       
       {/* Route */}
       <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative shrink-0 w-[140px]">
-        <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{id}</p>
+        <p className="font-sans font-semibold text-[#5e6578] text-[14px] leading-[normal] hover:text-[#2b3b63] cursor-pointer" onClick={() => navigate(`/transportation/routes/${id}`)}>{id}</p>
       </div>
       
-      {/* Route Name */}
+      {/* Status */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
-          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{assignee}</p>
+        <div className="content-stretch flex items-center px-[10px] py-[12px] relative size-full">
+          <StatusBadge status={status} />
         </div>
       </div>
       
       {/* Driver */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
-          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{workOrders}</p>
+          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{assignee || '\u2014'}</p>
         </div>
       </div>
 
+      {/* Scheduled */}
+      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
+          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{scheduledDate || '\u2014'}</p>
+        </div>
+      </div>
+      
+      {/* Waypoints */}
+      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex flex-col gap-[2px] items-start justify-center px-[10px] py-[12px] relative size-full">
+          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{workOrders}</p>
+        </div>
+      </div>
+      
       {/* Stops */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex flex-col gap-[2px] items-start justify-center px-[10px] py-[12px] relative size-full">
@@ -287,7 +291,7 @@ function RoutesTableItem({ id, assignee, workOrders, stops, distance, scheduledD
         </div>
       </div>
       
-      {/* Stop Type */}
+      {/* Total Distance */}
       <div className="flex flex-[1.5_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex flex-wrap gap-[12px] items-center px-[10px] py-[12px] relative size-full">
           <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal] whitespace-nowrap">{distance}</p>
@@ -297,27 +301,6 @@ function RoutesTableItem({ id, assignee, workOrders, stops, distance, scheduledD
             <div className="w-[3px] h-[3px] rounded-full bg-[#C0C4CC]" />
             <div className="w-[3px] h-[3px] rounded-full bg-[#C0C4CC]" />
           </div>
-        </div>
-      </div>
-
-      {/* Schedule */}
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
-          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{scheduledDate}</p>
-        </div>
-      </div>
-      
-      {/* Owner */}
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative size-full">
-          <p className="font-sans font-normal text-[#5e6578] text-[14px] leading-[normal]">{dispatched}</p>
-        </div>
-      </div>
-      
-      {/* Status */}
-      <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex items-center px-[10px] py-[12px] relative size-full">
-          <StatusBadge status={status} />
         </div>
       </div>
       

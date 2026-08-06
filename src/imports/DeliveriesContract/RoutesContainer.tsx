@@ -145,7 +145,7 @@ function RoutesTableHeader() {
   return (
     <div className="bg-white content-stretch flex items-center relative shrink-0 w-full" data-name="Table Header Row" style={{ minWidth: "1200px" }}>
       <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid border-t inset-[-1px_0] pointer-events-none" />
-      <Checkbox />
+      {/* <Checkbox /> hidden temporarily */}
       
       {/* Route */}
       <div className="content-stretch flex gap-[10px] items-end justify-end px-[10px] py-[12px] relative shrink-0 w-[140px]">
@@ -249,7 +249,7 @@ function RoutesTableItem({ id, assignee, workOrders, stops, distance, scheduledD
       onClick={() => navigate(`/transportation/routes/${id}`)}
     >
       <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid inset-[0_0_-1px_0] pointer-events-none" />
-      <div onClick={e => e.stopPropagation()}><Checkbox /></div>
+      {/* <div onClick={e => e.stopPropagation()}><Checkbox /></div> hidden temporarily */}
       
       {/* Route */}
       <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative shrink-0 w-[140px]">
@@ -305,8 +305,16 @@ function RoutesTableItem({ id, assignee, workOrders, stops, distance, scheduledD
       </div>
       
       <div className="content-stretch flex gap-[4px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[80px]">
-        <div onClick={(e) => { e.stopPropagation(); navigate(`/transportation/routes/${id}/edit`); }} className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors"><svg className="shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.333 2a2.121 2.121 0 0 1 3 3L5.667 13.667l-4 1 1-4L11.333 2z" stroke="#2B3B63" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg></div>
-        <div onClick={e => e.stopPropagation()} className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors"><svg className="shrink-0" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M5.333 4V2.667A1.333 1.333 0 0 1 6.667 1.333h2.666A1.333 1.333 0 0 1 10.667 2.667V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z" stroke="#2B3B63" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg></div>
+        <div className="relative group">
+          <div className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </div>
+          <div className="absolute right-0 top-full mt-1 bg-white border border-[#e0e0e0] rounded-[6px] shadow-lg hidden group-hover:flex flex-col w-[120px] z-[100] py-1" onClick={e => e.stopPropagation()}>
+            <button onClick={(e) => { e.stopPropagation(); navigate(`/transportation/routes/${id}`); }} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">View</button>
+            <button onClick={(e) => { e.stopPropagation(); navigate(`/transportation/routes/${id}/edit`); }} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">Edit</button>
+            <button onClick={(e) => { e.stopPropagation(); /* onDelete() */ }} className="px-4 py-2 text-left text-[14px] text-[#ef4444] hover:bg-[#F9FAFB] w-full cursor-pointer border-t border-[#f0f0f0]">Delete</button>
+          </div>
+        </div>
       </div>
     </div>
   );

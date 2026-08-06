@@ -512,8 +512,8 @@ export default function RouteDetailPage() {
               <div className="flex items-center justify-between flex-wrap px-[24px] py-[16px] border-b border-[#e8eaed]">
                 <div className="flex items-center gap-3">
                   <span className="text-[#2b3b63] text-[16px] font-bold">Route Details</span>
-                  <div className="flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[4px] bg-white">
-                    <select value={formStatus} onChange={e => setFormStatus(e.target.value)} className="text-[13px] font-semibold text-[#2b3b63] bg-transparent border-none outline-none cursor-pointer pr-1">
+                  <div className={`flex items-center gap-[6px] border border-[#e0e0e0] rounded-[6px] px-3 py-[4px] ${isNew ? 'bg-gray-100' : 'bg-white'}`}>
+                    <select value={formStatus} onChange={e => setFormStatus(e.target.value)} disabled={isNew} className={`text-[13px] font-semibold text-[#2b3b63] bg-transparent border-none outline-none pr-1 ${isNew ? 'cursor-not-allowed opacity-80' : 'cursor-pointer'}`}>
                       <option value="Draft">Draft</option>
                       <option value="Scheduled">Scheduled</option>
                       <option value="En Route">En Route</option>

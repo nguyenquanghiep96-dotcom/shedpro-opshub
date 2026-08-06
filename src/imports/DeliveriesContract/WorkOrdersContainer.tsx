@@ -139,18 +139,18 @@ const WO_COLUMNS = [
   { label: 'Customer',  flex: 'flex-[1_0_0]' },
   { label: 'Building',  flex: 'flex-[1.5_0_0]' },
   { label: 'Stops',     flex: 'flex-[2.5_0_0]' },
+  { label: 'Status',    flex: 'flex-[0.8_0_0]' },
   { label: 'Route',     flex: 'flex-[1_0_0]' },
   { label: 'Driver',    flex: 'flex-[1_0_0]' },
   { label: 'Scheduled', flex: 'flex-[1_0_0]' },
   { label: 'Completed', flex: 'flex-[1_0_0]' },
-  { label: 'Status',    flex: 'flex-[0.8_0_0]' },
 ];
 
 function WOTableHeader() {
   return (
     <div className="bg-white content-stretch flex items-center relative shrink-0 w-full" data-name="Table Header Row" style={{ minWidth: "1200px" }}>
       <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid border-t inset-[-1px_0] pointer-events-none" />
-      <Checkbox />
+      {/* <Checkbox /> hidden temporarily */}
       {WO_COLUMNS.map(col => (
         <div key={col.label} className={`${col.flex} flex flex-row items-center self-stretch`}>
           <div className="content-stretch flex gap-[10px] items-center px-[10px] py-[12px] relative size-full">
@@ -176,9 +176,14 @@ function WOTableItem({ wo, parentRoute, onView, onEdit, onDelete }: { wo: WorkOr
   if (wo.visit) stops.push(wo.visit);
 
   return (
-    <div className="bg-white content-stretch flex items-center relative shrink-0 w-full" data-name="Table Entry" style={{ minWidth: "1200px" }}>
+    <div 
+      className="bg-white content-stretch flex items-center relative shrink-0 w-full cursor-pointer hover:bg-gray-50 transition-colors" 
+      data-name="Table Entry" 
+      style={{ minWidth: "1200px" }}
+      onClick={onView}
+    >
       <div aria-hidden className="absolute border-[#e0e0e0] border-b border-solid inset-[0_0_-1px_0] pointer-events-none" />
-      <Checkbox />
+      {/* <Checkbox /> hidden temporarily */}
 
       {/* ID */}
       <div className="content-stretch flex flex-col gap-[4px] items-start justify-center px-[10px] py-[12px] relative shrink-0 w-[100px]">
@@ -257,6 +262,13 @@ function WOTableItem({ wo, parentRoute, onView, onEdit, onDelete }: { wo: WorkOr
         </div>
       </div>
 
+      {/* Status */}
+      <div className="flex flex-[0.8_0_0] flex-row items-center self-stretch">
+        <div className="content-stretch flex items-center px-[10px] py-[12px] relative size-full">
+           <StatusBadge status={wo.status} />
+        </div>
+      </div>
+
       {/* Route */}
       <div className="flex flex-[1_0_0] flex-row items-center self-stretch">
         <div className="content-stretch flex flex-col gap-[6px] items-start justify-center px-[10px] py-[12px] relative size-full">
@@ -286,23 +298,16 @@ function WOTableItem({ wo, parentRoute, onView, onEdit, onDelete }: { wo: WorkOr
         </div>
       </div>
 
-      {/* Status */}
-      <div className="flex flex-[0.8_0_0] flex-row items-center self-stretch">
-        <div className="content-stretch flex items-center px-[10px] py-[12px] relative size-full">
-           <StatusBadge status={wo.status} />
-        </div>
-      </div>
-
       {/* Actions */}
       <div className="content-stretch flex gap-[4px] items-center justify-end px-[10px] py-[12px] relative shrink-0 w-[80px]">
         <div className="relative group">
           <div className="cursor-pointer bg-white content-stretch flex gap-[6px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0 hover:bg-[#f5f5f5] transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#5E6578" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </div>
-          <div className="absolute right-0 top-full mt-1 bg-white border border-[#e0e0e0] rounded-[6px] shadow-lg hidden group-hover:flex flex-col w-[120px] z-[100] py-1">
-            <button onClick={onView} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">View</button>
-            <button onClick={onEdit} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">Edit</button>
-            <button onClick={onDelete} className="px-4 py-2 text-left text-[14px] text-[#ef4444] hover:bg-[#F9FAFB] w-full cursor-pointer border-t border-[#f0f0f0]">Delete</button>
+          <div className="absolute right-0 top-full mt-1 bg-white border border-[#e0e0e0] rounded-[6px] shadow-lg hidden group-hover:flex flex-col w-[120px] z-[100] py-1" onClick={e => e.stopPropagation()}>
+            <button onClick={(e) => { e.stopPropagation(); onView(); }} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">View</button>
+            <button onClick={(e) => { e.stopPropagation(); onEdit(); }} className="px-4 py-2 text-left text-[14px] text-[#2b3b63] hover:bg-[#F9FAFB] w-full cursor-pointer">Edit</button>
+            <button onClick={(e) => { e.stopPropagation(); onDelete(); }} className="px-4 py-2 text-left text-[14px] text-[#ef4444] hover:bg-[#F9FAFB] w-full cursor-pointer border-t border-[#f0f0f0]">Delete</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { Btn, StatusBadge } from './ui';
+import { Btn, StatusBadge, RoleLabel } from './ui';
 import { useTransportation } from './TransportationContext';
 
 export default function WOViewPage() {
@@ -148,21 +148,21 @@ export default function WOViewPage() {
                 {wo.pickup && (
                   <div className="flex items-center border border-[#e8eaed] rounded-[6px] px-4 py-3 bg-white shadow-sm">
                     <div className="w-[24px] h-[24px] rounded-full bg-[#2E323D] text-white flex items-center justify-center text-[12px] font-bold shrink-0">1</div>
-                    <div className="ml-3 px-2 py-0.5 rounded-[20px] bg-[#2563EB] text-white text-[10px] font-bold uppercase tracking-wider shrink-0">PICKUP</div>
+                    <RoleLabel role="PICKUP" className="ml-3 shrink-0" />
                     <span className="ml-3 text-[14px] font-medium text-[#5e6578] truncate">{wo.pickup}</span>
                   </div>
                 )}
                 {wo.dropoff && (
                   <div className="flex items-center border border-[#e8eaed] rounded-[6px] px-4 py-3 bg-white shadow-sm">
                     <div className="w-[24px] h-[24px] rounded-full bg-[#2E323D] text-white flex items-center justify-center text-[12px] font-bold shrink-0">{wo.pickup ? '2' : '1'}</div>
-                    <div className="ml-3 px-2 py-0.5 rounded-[20px] bg-[#E53E3E] text-white text-[10px] font-bold uppercase tracking-wider shrink-0">DROPOFF</div>
+                    <RoleLabel role="DROPOFF" className="ml-3 shrink-0" />
                     <span className="ml-3 text-[14px] font-medium text-[#5e6578] truncate">{wo.dropoff}</span>
                   </div>
                 )}
                 {wo.visit && (
                   <div className="flex items-center border border-[#e8eaed] rounded-[6px] px-4 py-3 bg-white shadow-sm">
                     <div className="w-[24px] h-[24px] rounded-full bg-[#2E323D] text-white flex items-center justify-center text-[12px] font-bold shrink-0">1</div>
-                    <div className="ml-3 px-2 py-0.5 rounded-[20px] bg-[#16A34A] text-white text-[10px] font-bold uppercase tracking-wider shrink-0">VISIT</div>
+                    <RoleLabel role="VISIT" className="ml-3 shrink-0" />
                     <span className="ml-3 text-[14px] font-medium text-[#5e6578] truncate">{wo.visit}</span>
                   </div>
                 )}

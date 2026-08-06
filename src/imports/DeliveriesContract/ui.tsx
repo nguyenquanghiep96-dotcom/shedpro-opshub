@@ -361,6 +361,39 @@ export function TypeBadge({ type, className = '' }: { type: string; className?: 
 }
 
 // ─────────────────────────────────────────────────────────────
+// ROLE LABEL (Stops)
+// ─────────────────────────────────────────────────────────────
+export const ROLE_COLORS: Record<string, { seq: string; pill: string }> = {
+  START:   { seq: '#2FA301', pill: '#2FA301' },
+  PICKUP:  { seq: '#2B3B63', pill: '#2B3B63' },
+  DROPOFF: { seq: '#FF7048', pill: '#FF7048' },
+  VISIT:   { seq: '#3B82F6', pill: '#3B82F6' },
+  END:     { seq: '#4B5563', pill: '#4B5563' },
+};
+
+export function RoleLabel({ role, className = '' }: { role: string; className?: string }) {
+  const rc = ROLE_COLORS[role] || ROLE_COLORS['VISIT'];
+  const color = rc.pill;
+  return (
+    <span
+      className={['inline-flex items-center gap-[4px] px-[8px] whitespace-nowrap', className].join(' ')}
+      style={{
+        color,
+        backgroundColor: `${color}20`,
+        border: `1px solid ${color}60`,
+        borderRadius: 999,
+        fontSize: 11,
+        fontWeight: 700,
+        height: 20,
+      }}
+    >
+      <span style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: color, display: 'inline-block', flexShrink: 0 }} />
+      <span style={{ lineHeight: 1, letterSpacing: '0.02em' }}>{role.toUpperCase()}</span>
+    </span>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
 // CHECKBOX
 // ─────────────────────────────────────────────────────────────
 interface CheckboxProps {

@@ -5,7 +5,7 @@ import {
   ASSIGNEE_OPTIONS, OWNER_OPTIONS, WO_TYPE_COLORS, isMoveType, resolveAddress,
 } from './transportationData';
 import RouteMap, { MapStop } from './RouteMap';
-import { Btn, Icons, CloseBtn, Input, Select, Textarea, FormLabel, Checkbox, StatusBadge, TypeBadge } from './ui';
+import { Btn, Icons, CloseBtn, Input, Select, Textarea, FormLabel, Checkbox, StatusBadge, TypeBadge, RoleLabel, ROLE_COLORS } from './ui';
 
 const getFullAddress = resolveAddress;
 
@@ -48,37 +48,7 @@ function buildStopsFromWOs(startAddr: string, workOrders: WorkOrder[]): RouteSto
   return stops;
 }
 
-// ============================================================
-// ROLE COLORS
-// ============================================================
-const ROLE_COLORS: Record<string, { seq: string; pill: string }> = {
-  START:   { seq: '#2FA301', pill: '#2FA301' },
-  PICKUP:  { seq: '#2B3B63', pill: '#2B3B63' },
-  DROPOFF: { seq: '#FF7048', pill: '#FF7048' },
-  VISIT:   { seq: '#3B82F6', pill: '#3B82F6' },
-  END:     { seq: '#4B5563', pill: '#4B5563' },
-};
 
-// ── Role Label ── dot + text, full-pill shape ──────────────
-function RoleLabel({ role, color }: { role: string; color: string }) {
-  return (
-    <span
-      className="inline-flex items-center gap-[4px] px-[8px] whitespace-nowrap"
-      style={{
-        color,
-        backgroundColor: `${color}20`,
-        border: `1px solid ${color}60`,
-        borderRadius: 999,
-        fontSize: 11,
-        fontWeight: 700,
-        height: 20,
-      }}
-    >
-      <span style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: color, display: 'inline-block', flexShrink: 0 }} />
-      <span style={{ lineHeight: 1, letterSpacing: '0.02em' }}>{role.toUpperCase()}</span>
-    </span>
-  );
-}
 
 // ── Drag handle 2×3 dots ───────────────────────────────────
 function DragHandle() {
@@ -431,7 +401,7 @@ export default function RouteDetailPage() {
             <div className="flex-1 px-4 py-3 min-w-0">
               {/* Header */}
               <div className="flex items-center gap-2 mb-[2px]">
-                <RoleLabel role={stop.role} color={rc.pill} />
+                <RoleLabel role={stop.role} />
                 <span className="text-[15px] font-bold text-[#2b3b63] leading-tight">{stop.location}</span>
                 {stop.status && !isStart && (
                   <div className="ml-auto shrink-0"><StatusBadge status={stop.status} /></div>
@@ -581,7 +551,7 @@ export default function RouteDetailPage() {
                         </div>
                         <div className="flex-1 px-4 py-3 min-w-0">
                           <div className="flex items-center gap-2 mb-[2px]">
-                            <RoleLabel role="END" color={ROLE_COLORS['END'].pill} />
+                            <RoleLabel role="END" />
                             <span className="text-[15px] font-bold text-[#2b3b63]">Back to start address</span>
                           </div>
                           <p className="text-[#787e90] text-[13px]">{formStartAddr}</p>

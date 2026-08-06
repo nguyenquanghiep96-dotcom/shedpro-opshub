@@ -433,20 +433,55 @@ export default function RouteViewPage() {
               </div>
               
               {/* Form fields */}
-              <div className="p-[24px]">
-                <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                  <div className="flex items-center"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Status</span><StatusBadge status={formStatus} /></div>
-                  <div className="flex items-center"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Driver</span><p className="text-[#2b3b63] font-medium text-[14px]">{formAssignee || 'Unassigned'}</p></div>
+              <div className="px-[24px] pb-[24px]">
+                <div className="flex flex-col">
+                  {/* Row 1 */}
+                  <div className="flex items-center border-b border-[#f0f0f0] py-4">
+                    <div className="flex-1 flex items-center pr-3">
+                      <span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Status</span>
+                      <StatusBadge status={formStatus} />
+                    </div>
+                    <div className="flex-1 flex items-center pl-3">
+                      <span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Driver</span>
+                      <p className="text-[#2b3b63] font-medium text-[14px]">{formAssignee || 'Unassigned'}</p>
+                    </div>
+                  </div>
                   
-                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Scheduled</span><p className="text-[#2b3b63] font-medium text-[14px]">{formDate}</p></div>
-                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Clients</span><p className="text-[#2b3b63] font-medium text-[14px]">Appalachian Storage <span className="text-[#787e90]">(Manufacturer)</span></p></div>
+                  {/* Row 2 */}
+                  <div className="flex items-center border-b border-[#f0f0f0] py-4">
+                    <div className="flex-1 flex items-center pr-3">
+                      <span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Scheduled</span>
+                      <p className="text-[#2b3b63] font-medium text-[14px]">{formDate}</p>
+                    </div>
+                    <div className="flex-1 flex items-center pl-3">
+                      <span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Clients</span>
+                      <p className="text-[#2b3b63] font-medium text-[14px]">Appalachian Storage <span className="text-[#787e90]">(Manufacturer)</span></p>
+                    </div>
+                  </div>
                   
-                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Planned Distance</span><p className="text-[#2b3b63] font-medium text-[14px]">{totalDistance}</p></div>
-                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Start</span><p className="text-[#2b3b63] font-medium text-[14px]">{formStartAddr}</p></div>
+                  {/* Row 3 */}
+                  <div className="flex items-center border-b border-[#f0f0f0] py-4">
+                    <div className="flex-1 flex items-center pr-3">
+                      <span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Planned Distance</span>
+                      <p className="text-[#2b3b63] font-medium text-[14px]">{totalDistance}</p>
+                    </div>
+                    <div className="flex-1 flex items-center pl-3">
+                      <span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">Start</span>
+                      <p className="text-[#2b3b63] font-medium text-[14px]">{formStartAddr}</p>
+                    </div>
+                  </div>
                   
-                  <div className="flex items-center pt-2"><span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">End</span><p className="text-[#2b3b63] font-medium text-[14px]">{backToStart ? formStartAddr : formEndAddr}</p></div>
+                  {/* Row 4 */}
+                  <div className="flex items-center border-b border-[#f0f0f0] py-4">
+                    <div className="flex-1 flex items-center pr-3">
+                      <span className="w-1/3 font-sans font-medium text-[#787e90] text-[12px] uppercase">End</span>
+                      <p className="text-[#2b3b63] font-medium text-[14px]">{backToStart ? formStartAddr : formEndAddr}</p>
+                    </div>
+                    <div className="flex-1 flex items-center pl-3"></div>
+                  </div>
                 </div>
-                <div className="mt-6">
+                
+                <div className="mt-4 pt-2">
                   <span className="block font-sans font-medium text-[#787e90] text-[12px] uppercase mb-1">Note</span>
                   <p className="text-[#2b3b63] font-medium text-[14px] whitespace-pre-wrap">{formNote || '—'}</p>
                 </div>
